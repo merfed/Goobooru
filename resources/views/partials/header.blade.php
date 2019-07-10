@@ -7,7 +7,10 @@
         <a class="active" href="#">Posts</a>
         <a href="#">Tags</a>
         <a href="#">Pools</a>
+        <a href="#">Notes</a>
         <a href="#">Comments</a>
+        <a href="#">Wiki</a>
+        <a href="#">Forum</a>
     </nav>
 
     <a href="#" class="login">Login</a>
@@ -18,11 +21,31 @@
     <nav class="d-flex secondary-nav">
         <a href="#">List</a>
         <a href="{{ route('upload') }}">Upload</a>
+        <a href="#">Hot</a>
         <a href="#">Random</a>
         <a href="#">Saved Searches</a>
+        <a href="#">URLs</a>
         <a href="#">TOS</a>
         <a href="#">DCMA</a>
         <a href="#">Help</a>
+    </nav>
+</div>
+@elseif ($type == 'notes')
+<div class="secondary-header d-flex flex-items-center">
+    <nav class="d-flex seconday-nav">
+        <a href="#">List</a>
+        <a href="#">Posts</a>
+        <a href="#">History</a>
+        <a href="#">Requests</a>
+        <a href="#">Help</a>
+    </nav>
+</div>
+@elseif ($type == 'wiki')
+<div class="secondary-header d-flex flex-items-center">
+    <nav class="d-flex seconday-nav">
+        <a href="#">Listing</a>
+        <a href="#">Help</a>
+        <a href="#">History</a>
     </nav>
 </div>
 @elseif ($type == 'account')
