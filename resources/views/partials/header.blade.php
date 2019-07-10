@@ -25,9 +25,7 @@
         <a href="#">Help</a>
     </nav>
 </div>
-@endif
-
-@if ($type == 'account')
+@elseif ($type == 'account')
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex seconday-nav">
         <a href="#">Home</a>
@@ -37,18 +35,14 @@
         <a href="#">Options</a>
     </nav>
 </div>
-@endif
-
-@if ($type == 'comments')
+@elseif ($type == 'comments')
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex seconday-nav">
         <a href="#">List</a>
         <a href="#">Help</a>
     </nav>
 </div>
-@endif
-
-@if ($type == 'tags')
+@elseif ($type == 'tags')
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex seconday-nav">
         <a href="#">Aliases</a>
@@ -58,9 +52,7 @@
         <a href="#">Saved Searches</a>
     </nav>
 </div>
-@endif
-
-@if ($type == 'pools')
+@elseif ($type == 'pools')
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex seconday-nav">
         <a href="#">List</a>
