@@ -13,6 +13,7 @@
     <a href="#" class="login">Login</a>
 </div>
 
+@if (! isset($type))
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex secondary-nav">
         <a href="#">List</a>
@@ -24,3 +25,47 @@
         <a href="#">Help</a>
     </nav>
 </div>
+@endif
+
+@if ($type == 'account')
+<div class="secondary-header d-flex flex-items-center">
+    <nav class="d-flex seconday-nav">
+        <a href="#">Home</a>
+        <a href="#">Profile</a>
+        <a href="#">Mail</a>
+        <a href="#">Favorites</a>
+        <a href="#">Options</a>
+    </nav>
+</div>
+@endif
+
+@if ($type == 'comments')
+<div class="secondary-header d-flex flex-items-center">
+    <nav class="d-flex seconday-nav">
+        <a href="#">List</a>
+        <a href="#">Help</a>
+    </nav>
+</div>
+@endif
+
+@if ($type == 'tags')
+<div class="secondary-header d-flex flex-items-center">
+    <nav class="d-flex seconday-nav">
+        <a href="#">Aliases</a>
+        <a href="#">Implications</a>
+        <a href="#">List</a>
+        <a href="#">Edit</a>
+        <a href="#">Saved Searches</a>
+    </nav>
+</div>
+@endif
+
+@if ($type == 'pools')
+<div class="secondary-header d-flex flex-items-center">
+    <nav class="d-flex seconday-nav">
+        <a href="#">List</a>
+        <a href="#">New</a>
+        <a href="#">Help</a>
+    </nav>
+</div>
+@endif
