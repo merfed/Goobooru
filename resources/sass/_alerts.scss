@@ -1,0 +1,20 @@
+.alert {
+    padding: $spacer-2 $spacer-3;
+    background: $gray-200;
+    color: $gray-800;
+}
+
+.alert-success {
+    background: $green-100;
+    color: $green-700;
+}
+
+.alert-warning {
+    background: $orange-100;
+    color: $orange-700;
+}
+
+.alert-error {
+    background: $red-100;
+    color: $red-700;
+}

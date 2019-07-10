@@ -14,7 +14,7 @@ class Controller extends BaseController
 
     public function index()
     {
-        return view('home');
+        return view('upload');
     }
 
     public function upload()

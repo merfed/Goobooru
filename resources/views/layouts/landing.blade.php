@@ -8,20 +8,12 @@
 
         <!-- Fonts -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
     </head>
     <body>
 
-        @include('partials.header')
-
-        @yield('mini-nav')
-
-        @include('partials.alerts')
-
-        <div class="wrapper">
-
-            @yield('content')
-
-        </div>
+        @yield('content')
 
     </body>
 

@@ -1189,6 +1189,120 @@ p.explain .minibutton {
   margin-left: -1px;
 }
 
+.alert {
+  padding: 8px 16px;
+  background: #e1e4e8;
+  color: #2f363d;
+}
+
+.alert-success {
+  background: #dcffe4;
+  color: #176f2c;
+}
+
+.alert-warning {
+  background: #ffebda;
+  color: #d15704;
+}
+
+.alert-error {
+  background: #ffdce0;
+  color: #b31d28;
+}
+
+.pagination::before {
+  display: table;
+  content: "";
+}
+
+.pagination::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.pagination a,
+.pagination span,
+.pagination em {
+  position: relative;
+  float: left;
+  padding: 7px 12px;
+  margin-left: -1px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  color: #0366d6;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: #fff;
+  border: 1px solid #e1e4e8;
+}
+
+.pagination a:first-child,
+.pagination span:first-child,
+.pagination em:first-child {
+  margin-left: 0;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.pagination a:last-child,
+.pagination span:last-child,
+.pagination em:last-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.pagination a:hover,
+.pagination a:focus,
+.pagination span:hover,
+.pagination span:focus,
+.pagination em:hover,
+.pagination em:focus {
+  z-index: 2;
+  text-decoration: none;
+  background-color: #eff3f6;
+  border-color: #e1e4e8;
+}
+
+.pagination .selected {
+  z-index: 3;
+}
+
+.pagination .current,
+.pagination .current:hover,
+.pagination .active,
+.pagination .active:hover {
+  z-index: 3;
+  color: #fff;
+  background-color: #0366d6;
+  border-color: #0366d6;
+}
+
+.pagination .gap,
+.pagination .disabled,
+.pagination .gap:hover,
+.pagination .disabled:hover {
+  color: #d1d5da;
+  cursor: default;
+  background-color: #fafbfc;
+}
+
+.paginate-container {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.paginate-container .pagination {
+  display: inline-block;
+}
+
 .flex-row {
   -webkit-box-orient: horizontal !important;
   -webkit-box-direction: normal !important;
@@ -2148,18 +2262,45 @@ body {
 }
 
 a {
-  color: #ffb545;
+  color: #743047;
   text-decoration: none;
 }
 
 a:hover {
-  color: #fff;
+  color: #333;
   text-decoration: underline;
 }
 
 b,
 strong {
   font-weight: 600;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 0;
+}
+
+[hidden][hidden] {
+  display: none !important;
+}
+
+details summary {
+  cursor: pointer;
+}
+
+details:not([open]) > *:not(summary) {
+  display: none !important;
 }
 
 h1,
@@ -2311,6 +2452,10 @@ pre {
   color: #c9597e;
 }
 
+.secondary-header .secondary-nav a.active {
+  font-weight: bold;
+}
+
 .upload-guidelines {
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 16px;
@@ -2367,5 +2512,103 @@ pre {
 
 .masonry-layout.columns-4 {
   --columns: 4;
+}
+
+.tags-table {
+  width: 100%;
+  overflow: auto;
+  text-align: left;
+}
+
+.tags-table .tags-table--name {
+  width: 90%;
+}
+
+.tags-table .tags-table--created {
+  width: 10%;
+}
+
+.tags-table th {
+  font-weight: 600;
+}
+
+.tags-table th,
+.tags-table td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+.tags-table tr {
+  background: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.tags-table tr:nth-child(2n) {
+  background: #f5f5f5;
+}
+
+.tags-table tr:hover .tag-edit,
+.tags-table tr:hover .tag-delete {
+  display: inline;
+  margin-right: 4px;
+}
+
+.tags-table .tag-edit,
+.tags-table .tag-delete {
+  display: none;
+  font-size: 12px;
+}
+
+.tags-table .tag-edit {
+  color: #aaa;
+}
+
+.tags-table .tag-delete {
+  color: #f00;
+}
+
+.landing {
+  width: 540px;
+  margin: 80px auto 0 auto;
+  text-align: center;
+}
+
+.landing h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 4px;
+  padding: 0;
+}
+
+.landing h1 a {
+  color: #c4245f;
+}
+
+.landing h1 a:hover {
+  color: #ff5795;
+}
+
+.landing .landing-nav {
+  margin-bottom: 4px;
+}
+
+.landing .landing-nav a {
+  margin: 0 8px;
+  color: #f967ab;
+}
+
+.landing .landing-search input {
+  width: 100%;
+  margin: 8px 0;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #d1d5da;
+  padding: 8px 8px;
+}
+
+.landing .landing-search input:focus {
+  border-color: #e865ae;
+  outline: none;
+  box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075), rgba(214, 3, 71, 0.3);
 }
 

@@ -15,6 +15,10 @@
 
         @include('partials.header')
 
+        @yield('mini-nav')
+
+        @include('partials.alerts')
+
         <div class="wrapper">
 
             <div class="sidebar">

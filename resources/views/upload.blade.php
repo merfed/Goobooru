@@ -1,5 +1,9 @@
 @extends('layouts.no-sidebar')
 
+@section('mini-nav')
+@include('partials.mini-nav.posts')
+@endsection
+
 @section('content')
 
 <div class="container-sm">
@@ -26,23 +30,34 @@
     <form>
         <dl class="form-group">
             <dt><label for="file">File</label></dt>
-            <dd><input class="form-control" type="file" name="file"></dd>
+            <dd><input class="form-control input-block" type="file" name="file"></dd>
         </dl>
 
         <dl class="form-group">
             <dt><label for="source">Source</label></dt>
-            <dd><input class="form-control" type="text" name="source"></dd>
+            <dd><input class="form-control input-block" type="text" name="source"></dd>
         </dl>
 
         <dl class="form-group">
             <dt><label for="title">Title</label></dt>
-            <dd><input class="form-control" type="text" name="title"></dd>
+            <dd><input class="form-control input-block" type="text" name="title"></dd>
         </dl>
 
         <dl class="form-group">
             <dt><label for="tags">Tags</label></dt>
-            <dd><textarea class="form-control" name="tags" id="" cols="30" rows="10"></textarea></dd>
+            <dd><textarea class="form-control input-block" name="tags" id="" cols="30" rows="10"></textarea></dd>
         </dl>
+
+        <dl class="form-group">
+            <dt><label for="rating">Rating</label></dt>
+            <dd class="form-checkbox">
+                <div class="d-block"><input type="radio" name="rating" value="1"> Safe</div>
+                <div class="d-block"><input type="radio" name="rating" value="2"> Questionable</div>
+                <div class="d-block"><input type="radio" name="rating" value="3"> Explicit</div>
+            </dd>
+        </dl>
+
+        <button class="btn" type="submit">Upload</button>
     </form>
 </div>
 

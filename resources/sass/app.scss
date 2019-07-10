@@ -353,6 +353,8 @@ template {
 @import 'mixins';
 @import 'variables';
 @import 'forms/index';
+@import 'alerts';
+@import 'pagination';
 @import 'flexbox';
 @import 'visibility';
 
@@ -374,11 +376,11 @@ body {
 }
 
 a {
-    color: #ffb545;
+    color: #743047;
     text-decoration: none;
 
     &:hover {
-        color: #fff;
+        color: #333;
         text-decoration: underline;
     }
 }
@@ -386,6 +388,41 @@ a {
 b,
 strong {
   font-weight: $font-weight-bold;
+}
+
+//
+// Remove most spacing between table cells.
+//
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  // Remove border radius added by Chrome macOS
+  border-radius: 0;
+}
+
+// increase the selector specificity for [hidden]
+// so that it always overrides utility classes (.d-block, etc.)
+[hidden][hidden] {
+  display: none !important;
+}
+
+details {
+  summary { cursor: pointer; }
+
+  &:not([open]) {
+    // Set details content hidden by default for browsers that don't do this
+    > *:not(summary) { display: none !important; }
+  }
 }
 
 // Headings
@@ -522,6 +559,10 @@ pre {
             padding: $spacer-2 $spacer-3;
             height: 100%;
             color: #c9597e;
+
+            &.active {
+                font-weight: bold;
+            }
         }
     }
 }
@@ -577,4 +618,107 @@ pre {
 }
 .masonry-layout.columns-4 {
   --columns: 4;
+}
+
+//
+// Tags
+//
+.tags-table {
+    width: 100%;
+    overflow: auto;
+    text-align: left;
+
+    .tags-table--name {
+        width: 90%;
+    }
+
+    .tags-table--created {
+        width: 10%;
+    }
+
+    th {
+      font-weight: $font-weight-bold;
+    }
+
+    th,
+    td {
+          padding: 6px 13px;
+          border: 1px solid lighten($gray-300, 5%);
+    }
+
+    tr {
+        background: #fff;
+        border-top: 1px solid darken($gray-300, 4%);
+
+        &:nth-child(2n) {
+            background: #f5f5f5;
+        }
+
+        &:hover {
+            .tag-edit,
+            .tag-delete {
+                display: inline;
+                margin-right: 4px;
+            }
+        }
+    }
+
+    .tag-edit,
+    .tag-delete {
+        display: none;
+        font-size: 12px;
+    }
+
+    .tag-edit { color: #aaa; }
+    .tag-delete { color: #f00; }
+}
+
+//
+// Landing
+//
+.landing {
+    width: 540px;
+    margin: 80px auto 0 auto;
+    text-align: center;
+
+    h1 {
+        font-size: 3em;
+        font-weight: bold;
+        margin-bottom: $spacer-1;
+        padding: 0;
+
+        a {
+            color: #c4245f;
+
+            &:hover {
+                color: #ff5795;
+            }
+        }
+    }
+
+    .landing-nav {
+        margin-bottom: $spacer-1;
+
+        a {
+            margin: 0 $spacer;
+            color: #f967ab;
+        }
+    }
+
+    .landing-search {
+        input {
+            width: 100%;
+            margin: $spacer-2 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid $gray-300;
+            padding: $spacer $spacer-2;
+
+            &:focus {
+                border-color: #e865ae;
+                outline: none;
+                box-shadow: $form-control-shadow, rgba(214, 3, 71, 0.3);
+            }
+        }
+    }
 }

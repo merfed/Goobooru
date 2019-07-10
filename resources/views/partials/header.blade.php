@@ -4,32 +4,20 @@
     </div>
 
     <nav class="nav d-flex flex-auto">
-        <a class="active" href="#">Posts</a>
-        <a href="#">Tags</a>
-        <a href="#">Pools</a>
-        <a href="#">Notes</a>
-        <a href="#">Comments</a>
-        <a href="#">Wiki</a>
-        <a href="#">Forum</a>
+        <a href="#" class="{{ (request()->is('posts*') || request()->is('posts/*')) ? 'active' : '' }}">Posts</a>
+        <a href="{{ route('tags') }}" class="{{ (request()->is('tags') || request()->is('tags/*')) ? 'active' : '' }}">Tags</a>
+        <a href="#" class="{{ request()->is('pools') ? 'active' : '' }}">Pools</a>
+        <a href="#" class="{{ request()->is('notes') ? 'active' : '' }}">Notes</a>
+        <a href="#" class="{{ request()->is('comments') ? 'active' : '' }}">Comments</a>
+        <a href="#" class="{{ request()->is('wiki') ? 'active' : '' }}">Wiki</a>
+        <a href="#" class="{{ request()->is('forum') ? 'active' : '' }}">Forum</a>
     </nav>
 
     <a href="#" class="login">Login</a>
 </div>
 
 @if (! isset($type))
-<div class="secondary-header d-flex flex-items-center">
-    <nav class="d-flex secondary-nav">
-        <a href="#">List</a>
-        <a href="{{ route('upload') }}">Upload</a>
-        <a href="#">Hot</a>
-        <a href="#">Random</a>
-        <a href="#">Saved Searches</a>
-        <a href="#">URLs</a>
-        <a href="#">TOS</a>
-        <a href="#">DCMA</a>
-        <a href="#">Help</a>
-    </nav>
-</div>
+
 @elseif ($type == 'notes')
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex seconday-nav">
@@ -63,16 +51,6 @@
     <nav class="d-flex seconday-nav">
         <a href="#">List</a>
         <a href="#">Help</a>
-    </nav>
-</div>
-@elseif ($type == 'tags')
-<div class="secondary-header d-flex flex-items-center">
-    <nav class="d-flex seconday-nav">
-        <a href="#">Aliases</a>
-        <a href="#">Implications</a>
-        <a href="#">List</a>
-        <a href="#">Edit</a>
-        <a href="#">Saved Searches</a>
     </nav>
 </div>
 @elseif ($type == 'pools')

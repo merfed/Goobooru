@@ -42,6 +42,19 @@ class Hive extends Migration
             $table->timestamps();
         });
 
+        Schema::create('boorus_tags', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('booru_id');
+            $table->integer('tag_id');
+            $table->timestamps();
+        });
+
+        Schema::create('hashes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('hash');
+            $table->timestamps();
+        });
+
         Schema::create('favs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('image_id');
