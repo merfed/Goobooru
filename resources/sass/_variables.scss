@@ -1,0 +1,512 @@
+// Layout variables
+// stylelint-disable declaration-bang-space-before
+
+// These are our margin and padding utility spacers. The default step size we
+// use is 8px. This gives us a key of:
+//    0 => 0px
+//    1 => 4px
+//    2 => 8px
+//    3 => 16px
+//    4 => 24px
+//    5 => 32px
+//    6 => 40px
+$spacer: 8px !default;
+
+// Our spacing scale
+$spacer-0: 0 !default;                  // 0
+$spacer-1: round($spacer / 2) !default; // 4px
+$spacer-2: $spacer !default;            // 8px
+$spacer-3: $spacer * 2 !default;        // 16px
+$spacer-4: $spacer * 3 !default;        // 24px
+$spacer-5: $spacer * 4 !default;        // 32px
+$spacer-6: $spacer * 5 !default;        // 40px
+
+// The list of spacer values
+$spacers: (
+  $spacer-0,
+  $spacer-1,
+  $spacer-2,
+  $spacer-3,
+  $spacer-4,
+  $spacer-5,
+  $spacer-6,
+) !default;
+
+// And the map of spacers, for easier looping:
+// @each $scale, $length in $spacer-map { ... }
+$spacer-map: (
+  0: $spacer-0,
+  1: $spacer-1,
+  2: $spacer-2,
+  3: $spacer-3,
+  4: $spacer-4,
+  5: $spacer-5,
+  6: $spacer-6,
+) !default;
+
+// Em spacer variables
+$em-spacer-1: 0.0625em !default; // 1/16
+$em-spacer-2: 0.125em !default;  // 1/8
+$em-spacer-3: 0.25em !default;   // 1/4
+$em-spacer-4: 0.375em !default;  // 3/8
+$em-spacer-5: 0.5em !default;    // 1/2
+$em-spacer-6: 0.75em !default;   // 3/4
+
+// Fixed-width container variables
+$container-width: 980px !default;
+$grid-gutter:     10px !default;
+
+// Breakpoint widths
+$width-xs: 0 !default;
+// Small screen / phone
+$width-sm: 544px !default;
+// Medium screen / tablet
+$width-md: 768px !default;
+// Large screen / desktop (980 + (16 * 2)) <= container + gutters
+$width-lg: 1012px !default;
+// Extra large screen / wide desktop
+$width-xl: 1280px !default;
+
+// Responsive container widths
+$container-sm: $width-sm !default;
+$container-md: $width-md !default;
+$container-lg: $width-lg !default;
+$container-xl: $width-xl !default;
+
+// Breakpoints in the form (name: length)
+$breakpoints: (
+  sm: $width-sm,
+  md: $width-md,
+  lg: $width-lg,
+  xl: $width-xl
+) !default;
+
+// This map in the form (breakpoint: variant) is used to iterate over
+// breakpoints and create both responsive and non-responsive classes in one
+// loop:
+//
+// ```scss
+// @each $breakpoint, $variant of $responsive-variants {
+//   @include breakpoint($breakpoint) {
+//     .foo#{$variant}-bar { foo: bar !important; }
+//   }
+// }
+// ```
+$responsive-variants: (
+  "": "",
+  sm: "-sm",
+  md: "-md",
+  lg: "-lg",
+  xl: "-xl",
+) !default;
+
+// responive utility position values
+$responsive-positions: (
+  static,
+  relative,
+  absolute,
+  fixed
+) !default;
+
+// Typography variables
+// stylelint-disable declaration-bang-space-before
+
+// Heading sizes - mobile
+// h4—h6 remain the same size on both mobile & desktop
+$h00-size-mobile: 40px !default;
+$h0-size-mobile: 32px !default;
+$h1-size-mobile: 26px !default;
+$h2-size-mobile: 22px !default;
+$h3-size-mobile: 18px !default;
+
+// Heading sizes - desktop
+$h00-size: 48px !default;
+$h0-size: 40px !default;
+$h1-size: 32px !default;
+$h2-size: 24px !default;
+$h3-size: 20px !default;
+$h4-size: 16px !default;
+$h5-size: 14px !default;
+$h6-size: 12px !default;
+
+$font-size-small: 12px !default;
+
+// Font weights
+$font-weight-bold: 600 !default;
+$font-weight-semibold: 500 !default;
+$font-weight-normal: 400 !default;
+$font-weight-light: 300 !default;
+
+// Line heights
+$lh-condensed-ultra: 1 !default;
+$lh-condensed: 1.25 !default;
+$lh-default: 1.5 !default;
+
+// Font stacks
+$body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+// Monospace font stack
+$mono-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !default;
+
+// The base body size
+$body-font-size: 14px !default;
+$body-line-height: $lh-default !default;
+
+// Body
+$body-bg: #f8fafc;
+
+//
+//
+// -------- Grays --------
+$gray-000:        #fafbfc !default;
+$gray-100:        #f6f8fa !default;
+$gray-200:        #e1e4e8 !default;
+$gray-300:        #d1d5da !default;
+$gray-400:        #959da5 !default;
+$gray-500:        #6a737d !default;
+$gray-600:        #586069 !default;
+$gray-700:        #444d56 !default;
+$gray-800:        #2f363d !default;
+$gray-900:        #24292e !default; // body font color
+
+// -------- Blue --------
+$blue-000:        #f1f8ff !default;
+$blue-100:        #dbedff !default;
+$blue-200:        #c8e1ff !default;
+$blue-300:        #79b8ff !default;
+$blue-400:        #2188ff !default;
+$blue-500:        #0366d6 !default; // Default: Passes AA with #fff
+$blue-600:        #005cc5 !default;
+$blue-700:        #044289 !default;
+$blue-800:        #032f62 !default;
+$blue-900:        #05264c !default; // Passes with 1/2/300 blues
+
+// -------- Green --------
+$green-000:       #f0fff4 !default;
+$green-100:       #dcffe4 !default;
+$green-200:       #bef5cb !default;
+$green-300:       #85e89d !default;
+$green-400:       #34d058 !default;
+$green-500:       #28a745 !default; // Default. passes AA Large
+$green-600:       #22863a !default; // Text green, passes AA on #fff
+$green-700:       #176f2c !default;
+$green-800:       #165c26 !default;
+$green-900:       #144620 !default;
+
+// -------- Yellow --------
+$yellow-000:      #fffdef !default;
+$yellow-100:      #fffbdd !default;
+$yellow-200:      #fff5b1 !default;
+$yellow-300:      #ffea7f !default;
+$yellow-400:      #ffdf5d !default;
+$yellow-500:      #ffd33d !default;
+$yellow-600:      #f9c513 !default;
+$yellow-700:      #dbab09 !default;
+$yellow-800:      #b08800 !default;
+$yellow-900:      #735c0f !default;
+
+// -------- Orange --------
+$orange-000:      #fff8f2 !default;
+$orange-100:      #ffebda !default;
+$orange-200:      #ffd1ac !default;
+$orange-300:      #ffab70 !default;
+$orange-400:      #fb8532 !default;
+$orange-500:      #f66a0a !default; // Default. passes AA Large with #fff
+$orange-600:      #e36209 !default;
+$orange-700:      #d15704 !default;
+$orange-800:      #c24e00 !default;
+$orange-900:      #a04100 !default;
+
+// -------- Red --------
+$red-000:         #ffeef0 !default;
+$red-100:         #ffdce0 !default;
+$red-200:         #fdaeb7 !default;
+$red-300:         #f97583 !default;
+$red-400:         #ea4a5a !default;
+$red-500:         #d73a49 !default; // Default. passes AA
+$red-600:         #cb2431 !default;
+$red-700:         #b31d28 !default;
+$red-800:         #9e1c23 !default;
+$red-900:         #86181d !default;
+
+// -------- Purple --------
+$purple-000:      #f5f0ff !default;
+$purple-100:      #e6dcfd !default;
+$purple-200:      #d1bcf9 !default;
+$purple-300:      #b392f0 !default;
+$purple-400:      #8a63d2 !default;
+$purple-500:      #6f42c1 !default; // passes AA with #fff
+$purple-600:      #5a32a3 !default;
+$purple-700:      #4c2889 !default;
+$purple-800:      #3a1d6e !default;
+$purple-900:      #29134e !default;
+
+// -------- Pink --------
+$pink-000:      #ffeef8 !default;
+$pink-100:      #fedbf0 !default;
+$pink-200:      #f9b3dd !default;
+$pink-300:      #f692ce !default;
+$pink-400:      #ec6cb9 !default;
+$pink-500:      #ea4aaa !default;
+$pink-600:      #d03592 !default;
+$pink-700:      #b93a86 !default;
+$pink-800:      #99306f !default;
+$pink-900:      #6d224f !default;
+
+// -------- Fades --------
+// Black based on same hue as $gray-900
+$black: #1b1f23 !default;
+$white: #fff !default;
+
+$black-fade-15:      rgba($black, 0.15) !default;
+$black-fade-30:      rgba($black, 0.3) !default;
+$black-fade-50:      rgba($black, 0.5) !default;
+$black-fade-70:      rgba($black, 0.7) !default;
+$black-fade-85:      rgba($black, 0.85) !default;
+
+$white-fade-15:      rgba($white, 0.15) !default;
+$white-fade-30:      rgba($white, 0.3) !default;
+$white-fade-50:      rgba($white, 0.5) !default;
+$white-fade-70:      rgba($white, 0.7) !default;
+$white-fade-85:      rgba($white, 0.85) !default;
+
+// -------- Color defaults --------
+$red:         $red-500 !default;
+$purple:      $purple-500 !default;
+$blue:        $blue-500 !default;
+$green:       $green-500 !default;
+$yellow:      $yellow-500 !default;
+$orange:      $orange-500 !default;
+
+$gray-dark:   $gray-900 !default;
+$gray-light:  $gray-400 !default;
+$gray:        $gray-500 !default;
+
+// -------- Color gradient maps --------
+
+$grays: (
+  0: $gray-000,
+  1: $gray-100,
+  2: $gray-200,
+  3: $gray-300,
+  4: $gray-400,
+  5: $gray-500,
+  6: $gray-600,
+  7: $gray-700,
+  8: $gray-800,
+  9: $gray-900,
+) !default;
+
+$blues: (
+  0: $blue-000,
+  1: $blue-100,
+  2: $blue-200,
+  3: $blue-300,
+  4: $blue-400,
+  5: $blue-500,
+  6: $blue-600,
+  7: $blue-700,
+  8: $blue-800,
+  9: $blue-900,
+) !default;
+
+$greens: (
+  0: $green-000,
+  1: $green-100,
+  2: $green-200,
+  3: $green-300,
+  4: $green-400,
+  5: $green-500,
+  6: $green-600,
+  7: $green-700,
+  8: $green-800,
+  9: $green-900,
+) !default;
+
+$yellows: (
+  0: $yellow-000,
+  1: $yellow-100,
+  2: $yellow-200,
+  3: $yellow-300,
+  4: $yellow-400,
+  5: $yellow-500,
+  6: $yellow-600,
+  7: $yellow-700,
+  8: $yellow-800,
+  9: $yellow-900,
+) !default;
+
+$oranges: (
+  0: $orange-000,
+  1: $orange-100,
+  2: $orange-200,
+  3: $orange-300,
+  4: $orange-400,
+  5: $orange-500,
+  6: $orange-600,
+  7: $orange-700,
+  8: $orange-800,
+  9: $orange-900,
+) !default;
+
+$reds: (
+  0: $red-000,
+  1: $red-100,
+  2: $red-200,
+  3: $red-300,
+  4: $red-400,
+  5: $red-500,
+  6: $red-600,
+  7: $red-700,
+  8: $red-800,
+  9: $red-900,
+) !default;
+
+$purples: (
+  0: $purple-000,
+  1: $purple-100,
+  2: $purple-200,
+  3: $purple-300,
+  4: $purple-400,
+  5: $purple-500,
+  6: $purple-600,
+  7: $purple-700,
+  8: $purple-800,
+  9: $purple-900,
+) !default;
+
+$pinks: (
+  0: $pink-000,
+  1: $pink-100,
+  2: $pink-200,
+  3: $pink-300,
+  4: $pink-400,
+  5: $pink-500,
+  6: $pink-600,
+  7: $pink-700,
+  8: $pink-800,
+  9: $pink-900,
+) !default;
+
+$hue-maps: (
+  "gray": $grays,
+  "blue": $blues,
+  "green": $greens,
+  "yellow": $yellows,
+  "orange": $oranges,
+  "red": $reds,
+  "purple": $purples,
+  "pink": $pinks,
+) !default;
+
+
+// Color variables
+// stylelint-disable declaration-bang-space-before
+
+// State indicators.
+$status-pending:    desaturate($yellow-700, 15%) !default;
+
+// Repository type colors
+// Should be able to deprecate these in future
+$repo-private-text: $black-fade-70 !default;
+$repo-private-bg:   $yellow-000 !default;
+$repo-private-icon: transparentize($yellow-900, 0.5) !default;
+
+// Highlight used for things like search
+$highlight-yellow: rgba(255, 247, 140, 0.5);
+
+// Border colors
+$border-black-fade:  $black-fade-15 !default;
+$border-white-fade:  $white-fade-15 !default;
+
+$border-blue:        $blue-500 !default;
+$border-blue-light:  $blue-200 !default;
+
+$border-green:       $green-400 !default;
+$border-green-light: desaturate($green-300, 40%) !default;
+
+$border-purple:      $purple !default;
+
+$border-red:         $red !default;
+$border-red-light:   desaturate($red-300, 60%) !default;
+
+$border-yellow:      desaturate($yellow-300, 60%) !default;
+
+$border-gray-dark:   $gray-300 !default;
+$border-gray-darker: $gray-700 !default;
+$border-gray-light:  lighten($gray-200, 3%) !default;
+$border-gray:        $gray-200 !default;
+
+// Background colors
+$bg-blue-light:     $blue-000 !default;
+$bg-blue:           $blue-500 !default;
+$bg-gray-dark:      $gray-900 !default;
+$bg-gray-light:     $gray-000 !default;
+$bg-gray:           $gray-100 !default;
+$bg-green:          $green-500 !default;
+$bg-green-light:    $green-100 !default;
+$bg-orange:         $orange-700 !default;
+$bg-purple:         $purple-500 !default;
+$bg-purple-light:   $purple-000 !default;
+$bg-pink:           $pink-500 !default;
+$bg-red:            $red-500 !default;
+$bg-red-light:      $red-100 !default;
+$bg-white:          $white !default;
+$bg-yellow:         $yellow-500 !default;
+$bg-yellow-light:   $yellow-200 !default;
+$bg-yellow-dark:    $yellow-700 !default;
+
+// Text colors
+$text-blue:         $blue-500 !default;
+$text-gray-dark:    $gray-900 !default;
+$text-gray-light:   $gray-500 !default;
+$text-gray:         $gray-600 !default;
+$text-green:        $green-500 !default;
+$text-orange:       $orange-900 !default;
+$text-orange-light: $orange-600 !default;
+$text-purple:       $purple !default;
+$text-pink:         $pink-500 !default;
+$text-red:          $red-600 !default;
+$text-white:        $white !default;
+$text-yellow:       $yellow-800 !default;
+
+// Miscellaneous variables
+// stylelint-disable declaration-bang-space-before
+
+// Border size
+$border-width: 1px !default;
+$border-color: $border-gray !default;
+$border-style: solid !default;
+$border: $border-width $border-color $border-style !default;
+$border-radius: 3px !default;
+
+// Custom explore grid border
+$exploregrid-item-border-radius: 4px;
+
+// Box shadow
+$box-shadow: 0 1px 1px rgba($black, 0.1) !default;
+$box-shadow-medium: 0 1px 5px $black-fade-15 !default;
+$box-shadow-large: 0 1px 15px $black-fade-15 !default;
+$box-shadow-extra-large: 0 10px 50px rgba($black, 0.07) !default;
+
+// Tooltips
+$tooltip-max-width: 250px !default;
+$tooltip-background-color: $black;
+$tooltip-text-color: $white !default;
+$tooltip-delay: 0.4s !default;
+$tooltip-duration: 0.1s !default;
+
+// Should be moved into custom github css
+$stats-switcher-py: 10px;
+// Future proof this `height` value by finding the computed line-height, then
+// adding the total value of the vertical padding. This var is used to toggle
+// between the stats bar and language breakdown.
+$stats-viewport-height: ($body-font-size * $body-line-height) + ($stats-switcher-py * 2);
+
+$min_tab_size: 1;
+$max_tab_size: 12;
+
+// Button and form variables
+$form-control-shadow: inset 0 1px 2px rgba($black, 0.075);
+$btn-input-focus-shadow: 0 0 0 0.2em rgba($blue, 0.3);
+$btn-active-shadow: inset 0 0.15em 0.3em $black-fade-15;
