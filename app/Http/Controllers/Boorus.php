@@ -23,6 +23,13 @@ class Boorus extends Controller
         ]);
     }
 
+    public function random()
+    {
+        return view('posts.view', [
+            'post' => Booru::all()->random()
+        ]);
+    }
+
     public function tos()
     {
         return view('posts.tos');
