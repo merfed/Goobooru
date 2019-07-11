@@ -42,6 +42,44 @@ class Tags extends Controller
         return (count(explode(',', $tags)) >= config('goobooru.min_tags'));
     }
 
+     public static function processMeta($tag, $type, $booru = null)
+    {
+        $ignored = [];
+        $tag = trim($tag);
+        $check = Tag::where('name', $tag)->first();
+
+        if ($tag !== '') {
+            if ($check === null) {
+                $t = Tag::create([
+                    'name' => $tag,
+                    'type' => $type
+                ]);
+
+                if ($booru != null) {
+                    Tagged::create([
+                        'booru_id' => $booru->id,
+                        'tag_id' => $t->id
+                    ]);
+                }
+            } else {
+                if ($booru != null) {
+                    Tagged::create([
+                        'booru_id' => $booru->id,
+                        'tag_id' => $check->id
+                    ]);
+                }
+
+                $ignored[] = $tag;
+            }
+        }
+
+        if (count($ignored) == 0) {
+            return redirect()->back()->with('success', 'All tags have been added!');
+        } else {
+            return redirect()->back()->with('warning', 'Some of the tags you entered were duplicates and were not added: <i>'. implode(',', $ignored) .'</i>.');
+        }
+    }
+
     public static function processTags($tags, $booru = null)
     {
         $tags = rtrim($tags, ',');

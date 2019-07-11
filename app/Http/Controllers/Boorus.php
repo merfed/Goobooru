@@ -19,7 +19,8 @@ class Boorus extends Controller
     public function post($id)
     {
         return view('posts.view', [
-            'post' => Booru::find($id)
+            'post' => Booru::find($id),
+            'metas' => ['artists', 'characters', 'copyrights', 'years']
         ]);
     }
 
@@ -77,6 +78,8 @@ class Boorus extends Controller
 
         Tags::processTags(request('tags'), $booru);
 
+        $this->processMeta($request, $booru);
+
         return redirect()->back()->with('success', 'Your image has been uploaded successfully.');
     }
 
@@ -89,5 +92,21 @@ class Boorus extends Controller
         // NO HASH FOUND
             // Create hash
             // return TRUE
+    }
+
+    public function processMeta($request, $booru)
+    {
+        $metas = [
+            1 => 'artist',
+            2 => 'character',
+            3 => 'copyright',
+            4 => 'year'
+        ];
+
+        foreach ($metas as $id => $type) {
+            if ($request->has($type)) {
+                Tags::processMeta(request($type), $id, $booru);
+            }
+        }
     }
 }

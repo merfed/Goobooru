@@ -6444,6 +6444,22 @@ pre {
   color: #f00;
 }
 
+.tags-artist {
+  color: #a00;
+}
+
+.tag-character {
+  color: #0a0;
+}
+
+.tag-copyright {
+  color: #a0a;
+}
+
+.tag-year {
+  color: #00a;
+}
+
 .landing {
   width: 540px;
   margin: 80px auto 0 auto;

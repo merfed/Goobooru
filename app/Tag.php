@@ -12,4 +12,17 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Booru', 'boorus_tags');
     }
+
+    public function getType()
+    {
+        $type = [
+            0 => 'tag',
+            1 => 'artist',
+            2 => 'character',
+            3 => 'copyright',
+            4 => 'year'
+        ];
+
+        return $type[$this->type];
+    }
 }

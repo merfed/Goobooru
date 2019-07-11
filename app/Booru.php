@@ -10,7 +10,27 @@ class Booru extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('App\Tag', 'boorus_tags')->withCount('posts');
+        return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 0)->withCount('posts');
+    }
+
+    public function artists()
+    {
+        return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 1)->withCount('posts');
+    }
+
+    public function characters()
+    {
+        return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 2)->withCount('posts');
+    }
+
+    public function copyrights()
+    {
+        return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 3)->withCount('posts');
+    }
+
+    public function years()
+    {
+        return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 4)->withCount('posts');
     }
 
     public function getRating()

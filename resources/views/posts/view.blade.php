@@ -6,6 +6,17 @@
 
 @section('sidebar')
 
+@foreach ($metas as $meta)
+@if ($post->$meta()->count() > 0)
+<h4 class="mb-2">{{ ($post->$meta()->count() > 1) ? ucfirst($meta) : substr(ucfirst($meta), 0, -1) }}</h4>
+<ul style="list-style-type: none;" class="mb-3">
+    @foreach ($post->$meta as $tag)
+    <li>@include('partials.tag', ['tag' => $tag])</li>
+    @endforeach
+</ul>
+@endif
+@endforeach
+
 <h4 class="mb-2">Tags</h4>
 <ul style="list-style-type: none;" class="mb-6">
     @foreach ($post->tags as $tag)
