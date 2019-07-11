@@ -23,6 +23,8 @@ Route::get('/posts/dcma', 'Boorus@dcma')->name('dcma');
 Route::get('/posts/tos', 'Boorus@tos')->name('tos');
 // Route::get('/posts/help', 'Boorus@help')->name('help');
 
+Route::get('/post/{id}', 'Boorus@post')->name('post');
+
 // Route::get('/notes', 'Notes@index')->name('notes');
 
 Route::get('/tags', 'Tags@index')->name('tags');

@@ -356,6 +356,8 @@ template {
 @import 'alerts';
 @import 'pagination';
 @import 'flexbox';
+@import 'margin';
+@import 'padding';
 @import 'visibility';
 
 input,
@@ -608,9 +610,9 @@ pre {
   grid-template-columns: repeat(var(--columns), 1fr);
   grid-gap: var(--gap);
 }
-.masonry-layout > div > img,
-.masonry-layout > div > div,
-.masonry-layout > div > video {
+.masonry-layout > div > a > img,
+.masonry-layout > div > a > div,
+.masonry-layout > div > a > video {
   width: 100%;
   margin-bottom: 2rem;
 }

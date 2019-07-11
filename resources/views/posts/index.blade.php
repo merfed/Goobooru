@@ -22,7 +22,9 @@
 <div class="wrapper-masonry content">
     <div id="masonry">
         @foreach ($posts as $post)
-        <img src="{{ asset('uploads/'.$post->image) }}" class="image" alt="">
+        <a href="{{ route('post', ['id' => $post->id]) }}" class="image">
+            <img src="{{ asset('uploads/'.$post->image) }}" alt="">
+        </a>
         @endforeach
     </div>
 </div>
