@@ -9,7 +9,7 @@
 <h4 class="mb-2">Tags</h4>
 <ul style="list-style-type: none;" class="mb-6">
     @foreach ($post->tags as $tag)
-    <li><a href="#">{{ $tag->name }}</a></li>
+    <li>@include('partials.tag', ['tag' => $tag])</li>
     @endforeach
 </ul>
 

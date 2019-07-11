@@ -10,7 +10,7 @@ class Booru extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('App\Tag', 'boorus_tags');
+        return $this->belongsToMany('App\Tag', 'boorus_tags')->withCount('posts');
     }
 
     public function getRating()

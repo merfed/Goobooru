@@ -9,11 +9,7 @@
 
 <ul class="sidebar-tags">
     @foreach ($tags as $tag)
-    <li>
-        <a href="#" style="margin-right: 4px;">?</a>
-        <a href="#">{{ $tag->name }}</a>
-        <span style="color: #ccc;">{{ number_format($tag->posts_count) }}</span>
-    </li>
+    <li>@include('partials.tag', ['tag' => $tag])</li>
     @endforeach
 </ul>
 @endsection
