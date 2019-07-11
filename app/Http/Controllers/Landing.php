@@ -9,8 +9,7 @@ class Landing extends Controller
 {
     public function index()
     {
-        // $count = Booru::count();
-        $count = mt_rand(35355,85523);
+        $count = Booru::count();
 
         return view('home', [
             'count' => $count,
