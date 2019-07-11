@@ -46,6 +46,26 @@
         </dl>
 
         <dl class="form-group">
+            <dt><label for="artist">Artist</label></dt>
+            <dd><input class="form-control input-block" type="text" name="artist"></dd>
+        </dl>
+
+        <dl class="form-group">
+            <dt><label for="character">Character</label></dt>
+            <dd><input class="form-control input-block" type="text" name="character"></dd>
+        </dl>
+
+        <dl class="form-group">
+            <dt><label for="copyright">Copyright</label></dt>
+            <dd><input class="form-control input-block" type="text" name="copyright"></dd>
+        </dl>
+
+        <dl class="form-group">
+            <dt><label for="year">Year</label></dt>
+            <dd><input class="form-control input-block" type="text" name="year"></dd>
+        </dl>
+
+        <dl class="form-group">
             <dt><label for="tags">Tags</label></dt>
             <dd><textarea class="form-control input-block" name="tags" id="" cols="30" rows="10"></textarea></dd>
         </dl>
