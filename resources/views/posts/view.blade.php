@@ -53,7 +53,7 @@
 @if ($post->getFileType() == 'webm')
 <video controls loop="true" src="{{ asset('uploads/'.$post->image) }}"></video>
 @else
-<img style="width: 100%;" src="{{ asset('uploads/'.$post->image) }}" alt="">
+<img src="{{ asset('uploads/'.$post->image) }}" alt="">
 @endif
 
 <div class="actions" style="margin: 16px 0;">

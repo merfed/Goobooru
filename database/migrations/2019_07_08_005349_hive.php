@@ -27,6 +27,7 @@ class Hive extends Migration
             $table->integer('score')->default('0');
             $table->boolean('locked')->nullable();
             $table->boolean('flagged_for_delete')->nullable();
+            $table->integer('views')->default('0');
             $table->timestamps();
         });
 

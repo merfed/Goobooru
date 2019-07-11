@@ -16,10 +16,13 @@ class Boorus extends Controller
         ]);
     }
 
-    public function post($id)
+    public function post(Booru $id)
     {
+        $id->views += 1;
+        $id->save();
+
         return view('posts.view', [
-            'post' => Booru::find($id),
+            'post' => $id,
             'metas' => ['artists', 'characters', 'copyrights', 'years']
         ]);
     }
