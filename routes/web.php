@@ -16,7 +16,7 @@ Route::get('/', 'Landing@index')->name('landing');
 Route::get('/posts', 'Boorus@index')->name('posts');
 Route::get('/posts/upload', 'Boorus@create')->name('upload');
 Route::post('/posts/upload', 'Boorus@store')->name('uploadPost');
-// Route::get('/posts/hot', 'Controller@hot')->name('hotPosts');
+Route::get('/posts/hot', 'Boorus@hot')->name('hotPosts');
 Route::get('/posts/random', 'Boorus@random')->name('random');
 // Route::get('/posts/urls', 'Controller@urls')->name('urlPosts');
 Route::get('/posts/dcma', 'Boorus@dcma')->name('dcma');

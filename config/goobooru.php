@@ -5,6 +5,24 @@ return [
     // Site Settings
     'name' => 'Goobooru',
 
+    // Display settings
+    'counter_type' => 'graphic', // graphic or text
+    'counter_style' => 'normal', // normal or colorful,
+    'counter_colors' => [
+        0 => '#c7bc20',
+        1 => '#8ec720',
+        2 => '#20c796',
+        3 => '#209ec7',
+        4 => '#2420c7',
+        5 => '#9220c7',
+        6 => '#c7208e',
+        7 => '#c72047',
+        8 => '#c74720',
+        9 => '#c77e20',
+    ],
+    'paginate' => 24, // We do columns of 8, so a divisible value makes it look nice
+    'hot_threshold' => 25, // Number of views to show up on the hot page
+
     // Upload Settings
     'max_file_size' => '12000', // In MB
     'allowed_filetypes' => 'jpeg,png,gif,jpg,bmp,webm,gifv,svg',

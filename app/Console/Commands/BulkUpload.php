@@ -43,7 +43,7 @@ class BulkUpload extends Command
 
         foreach ($files as $file) {
             $ext = pathinfo(public_path('uploads/'. $file), PATHINFO_EXTENSION);
-            $name = str_random(16) .'.'. $ext;
+            $name = str_random(32) .'.'. $ext;
 
             rename(public_path('import/'. $file), public_path('uploads/'. $name));
 

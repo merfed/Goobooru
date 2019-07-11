@@ -9,6 +9,13 @@ class Landing extends Controller
 {
     public function index()
     {
-        return view('home', ['count' => Booru::count()]);
+        // $count = Booru::count();
+        $count = mt_rand(35355,85523);
+
+        return view('home', [
+            'count' => $count,
+            'split_count' => str_split($count),
+            'rainbow' => config('goobooru.counter_colors')
+        ]);
     }
 }

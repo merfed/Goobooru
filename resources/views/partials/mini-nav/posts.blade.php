@@ -2,7 +2,7 @@
     <nav class="d-flex flex-auto secondary-nav">
         <a href="{{ route('posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">List</a>
         <a href="{{ route('upload') }}" class="{{ request()->is('posts/upload') ? 'active' : '' }}">Upload</a>
-        <a href="#">Hot</a>
+        <a href="{{ route('hotPosts') }}" class="{{ request()->is('posts/hot') ? 'active' : '' }}">Hot</a>
         <a href="{{ route('random') }}" class="{{ request()->is('posts/random') ? 'active' : '' }}">Random</a>
         <a href="#">Saved Searches</a>
         <a href="#">URLs</a>

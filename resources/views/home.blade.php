@@ -18,7 +18,19 @@
     </div>
 
     <div class="mt-2 landing-counter">
-        {{ $count }}
+        @if (config('goobooru.counter_type') == 'text')
+            @if (config('goobooru.counter_style') == 'normal')
+            {{ $count }}
+            @else
+                @foreach ($split_count as $i)
+                <span style="color: {{ $rainbow[$i] }}; margin-right: -10px;">{{ $i }}</span>
+                @endforeach
+            @endif
+        @else
+            @foreach ($split_count as $i)
+            <img src="{{ asset('/imgs/dudes/'. config('goobooru.counter_style') .'-'. $i .'.png') }}" alt="">
+            @endforeach
+        @endif
     </div>
 </div>
 @endsection
