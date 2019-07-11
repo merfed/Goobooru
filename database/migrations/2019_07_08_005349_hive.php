@@ -72,6 +72,13 @@ class Hive extends Migration
             $table->boolean('visible')->default('1');
             $table->timestamps();
         });
+
+        Schema::create('boorus_pools', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('booru_id');
+            $table->integer('pool_id');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -86,6 +93,7 @@ class Hive extends Migration
         Schema::dropIfExists('favs');
         Schema::dropIfExists('pools');
         Schema::dropIfExists('boorus_tags');
+        Schema::dropIfExists('boorus_pools');
         Schema::dropIfExists('hashes');
     }
 }

@@ -25,6 +25,16 @@ Route::get('/posts/tos', 'Boorus@tos')->name('tos');
 
 Route::get('/post/{id}', 'Boorus@post')->name('post');
 
+Route::get('/pools', 'Pools@index')->name('pools');
+Route::get('/pools/new', 'Pools@create')->name('poolsCreate');
+Route::post('/pools/new', 'Pools@store')->name('poolsPostCreate');
+Route::get('/pools/add/post/{id}', 'Pools@addPost')->name('poolsAddPost');
+Route::post('/pools/add/post/{id}', 'Pools@storePost')->name('poolsPostAddPost');
+Route::get('/pools/add/posts', 'Pools@addPosts')->name('poolsBulkAddPost');
+Route::post('/pools/add/posts', 'Pools@storePosts')->name('poolsPostBulkAddPost');
+Route::get('/pools/add/tags', 'Pools@addTags')->name('poolsBulkAddTags');
+Route::post('/pools/add/tags', 'Pools@storeTags')->name('poolsPostBulkAddTags');
+
 // Route::get('/notes', 'Notes@index')->name('notes');
 
 Route::get('/tags', 'Tags@index')->name('tags');

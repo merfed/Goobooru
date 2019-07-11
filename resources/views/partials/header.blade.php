@@ -6,7 +6,7 @@
     <nav class="nav d-flex flex-auto">
         <a href="{{ route('posts') }}" class="{{ (request()->is('posts*') || request()->is('posts/*')) ? 'active' : '' }}">Posts</a>
         <a href="{{ route('tags') }}" class="{{ (request()->is('tags') || request()->is('tags/*')) ? 'active' : '' }}">Tags</a>
-        <a href="#" class="{{ request()->is('pools') ? 'active' : '' }}">Pools</a>
+        <a href="{{ route('pools') }}" class="{{ (request()->is('pools') || request()->is('pools/*')) ? 'active' : '' }}">Pools</a>
         <a href="#" class="{{ request()->is('notes') ? 'active' : '' }}">Notes</a>
         <a href="#" class="{{ request()->is('comments') ? 'active' : '' }}">Comments</a>
         <a href="#" class="{{ request()->is('wiki') ? 'active' : '' }}">Wiki</a>
@@ -50,14 +50,6 @@
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex seconday-nav">
         <a href="#">List</a>
-        <a href="#">Help</a>
-    </nav>
-</div>
-@elseif ($type == 'pools')
-<div class="secondary-header d-flex flex-items-center">
-    <nav class="d-flex seconday-nav">
-        <a href="#">List</a>
-        <a href="#">New</a>
         <a href="#">Help</a>
     </nav>
 </div>

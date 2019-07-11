@@ -37,12 +37,12 @@
 <h4 class="mb-2">Options</h4>
 <ul style="list-style-type: none;" class="mb-6">
     <li><a href="#">Edit</a></li>
-    <li><a href="#">Original image</a></li>
+    <li><a href="{{ asset('uploads/'.$post->image) }}">Original image</a></li>
     <li><a href="#">Delete</a></li>
     <li><a href="#">Flag for deletion</a></li>
     <li><a href="#">Add note</a></li>
     <li><a href="#">Add to favorites</a></li>
-    <li><a href="#">Add to pool</a></li>
+    <li><a href="{{ route('poolsAddPost', ['post' => $post->id]) }}">Add to pool</a></li>
     <li><a href="#">Lock</a></li>
 </ul>
 
@@ -53,7 +53,7 @@
 @if ($post->getFileType() == 'webm')
 <video controls loop="true" src="{{ asset('uploads/'.$post->image) }}"></video>
 @else
-<img src="{{ asset('uploads/'.$post->image) }}" alt="">
+<img style="width: 100%;" src="{{ asset('uploads/'.$post->image) }}" alt="">
 @endif
 
 <div class="actions" style="margin: 16px 0;">

@@ -16,13 +16,7 @@
 
 @if(Session::has('warning'))
 <div class="alert alert-warning">
-    {!! Session::get('error') !!}
-</div>
-@endif
-
-@if(Session::has('message'))
-<div class="alert alert-{{ Session::get('status') }}">
-    {{ Session::get('message') }}
+    {!! Session::get('warning') !!}
 </div>
 @endif
 

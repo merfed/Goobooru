@@ -27,14 +27,19 @@ class Tags extends Controller
         return self::processTags(request('tags'));
     }
 
-    public function edit()
+    public function edit(Tag $tag)
     {
-
+        return view('tags.edit', ['tag' => $tag]);
     }
 
-    public function destroy()
+    public function destroy(Tag $tag)
     {
+        return view('tag.delete', ['tag' => $tag]);
+    }
 
+    public function view(Tag $tag)
+    {
+        return view('tag.view', ['tag' => $tag]);
     }
 
     public static function hasEnoughTags($tags)
