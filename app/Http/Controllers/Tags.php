@@ -50,10 +50,9 @@ class Tags extends Controller
 
         foreach ($tags as $tag) {
             $tag = trim($tag);
+            $check = Tag::where('name', $tag)->first();
 
             if ($tag !== '') {
-                $check = Tag::where('name', $tag)->first();
-
                 if ($check === null) {
                     $t = Tag::create([
                         'name' => $tag,
@@ -67,6 +66,13 @@ class Tags extends Controller
                         ]);
                     }
                 } else {
+                    if ($booru != null) {
+                        Tagged::create([
+                            'booru_id' => $booru->id,
+                            'tag_id' => $check->id
+                        ]);
+                    }
+
                     $ignored[] = $tag;
                 }
             }
