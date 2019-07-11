@@ -19,7 +19,11 @@
     <div id="masonry">
         @foreach ($posts as $post)
         <a href="{{ route('post', ['id' => $post->id]) }}" class="image">
+            @if ($post->getFileType() == 'webm')
+            <video controls loop="true" src="{{ asset('uploads/'.$post->image) }}"></video>
+            @else
             <img src="{{ asset('uploads/'.$post->image) }}" alt="">
+            @endif
         </a>
         @endforeach
     </div>

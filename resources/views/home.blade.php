@@ -16,5 +16,9 @@
     <div class="landing-search">
         <input type="text">
     </div>
+
+    <div class="mt-2 landing-counter">
+        {{ $count }}
+    </div>
 </div>
 @endsection

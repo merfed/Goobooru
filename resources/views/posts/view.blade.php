@@ -50,7 +50,11 @@
 
 @section('content')
 
+@if ($post->getFileType() == 'webm')
+<video controls loop="true" src="{{ asset('uploads/'.$post->image) }}"></video>
+@else
 <img src="{{ asset('uploads/'.$post->image) }}" alt="">
+@endif
 
 <div class="actions" style="margin: 16px 0;">
     <a href="#">Edit</a> | <a href="#">Favorite</a> | <a href="#">Flag</a>

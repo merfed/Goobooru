@@ -43,4 +43,9 @@ class Booru extends Model
 
         return $ratings[$this->rating];
     }
+
+    public function getFileType()
+    {
+        return pathinfo(asset('uploads/'. $this->image), PATHINFO_EXTENSION);
+    }
 }
