@@ -11,8 +11,8 @@ class Boorus extends Controller
     public function index()
     {
         return view('posts.index', [
-            'tags' => Tag::withCount('posts')->latest()->take(20)->get(),
-            'posts' => Booru::latest()->paginate(20)
+            'tags' => Tag::withCount('posts')->latest()->take(40)->get(),
+            'posts' => Booru::latest()->paginate(24)
         ]);
     }
 
