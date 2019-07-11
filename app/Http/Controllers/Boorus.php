@@ -50,7 +50,7 @@ class Boorus extends Controller
     {
         $this->validate($request, [
             'file' => 'required|mimes:'. config('goobooru.allowed_filetypes') .'|max:'. config('goobooru.max_file_size'),
-            'title' => 'required|min:2,max:512',
+            'title' => 'max:512',
             'tags' => 'required',
             'rating' => 'required'
         ]);
