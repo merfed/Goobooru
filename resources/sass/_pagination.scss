@@ -13,7 +13,7 @@
     font-size: 13px;
     font-style: normal;
     font-weight: $font-weight-bold;
-    color: $text-blue;
+    color: #d6035b;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
@@ -50,8 +50,8 @@
   .active:hover {
     z-index: 3;
     color: $text-white;
-    background-color: $bg-blue;
-    border-color: $border-blue;
+    background-color: #ce1c66;
+    border-color: #ce1c66;
   }
 
   .gap,

@@ -12,7 +12,7 @@ class Boorus extends Controller
     {
         return view('posts.index', [
             'tags' => Tag::withCount('posts')->latest()->take(20)->get(),
-            'posts' => Booru::latest()->paginate(2)
+            'posts' => Booru::latest()->paginate(20)
         ]);
     }
 

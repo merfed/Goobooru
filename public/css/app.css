@@ -1231,7 +1231,7 @@ p.explain .minibutton {
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
-  color: #0366d6;
+  color: #d6035b;
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
@@ -1280,8 +1280,8 @@ p.explain .minibutton {
 .pagination .active:hover {
   z-index: 3;
   color: #fff;
-  background-color: #0366d6;
-  border-color: #0366d6;
+  background-color: #ce1c66;
+  border-color: #ce1c66;
 }
 
 .pagination .gap,
