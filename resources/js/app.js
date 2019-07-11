@@ -53,4 +53,4 @@ var fecthMasonry = function (container, items, columns) {
     });
 };
 
-fecthMasonry('masonry', 'image', 3);
+fecthMasonry('masonry', 'image', 8);
