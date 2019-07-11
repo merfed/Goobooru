@@ -753,3 +753,33 @@ pre {
         color: #ff5795;
     }
 }
+
+//
+// Queue
+//
+
+.queue-post {
+    margin-bottom: $spacer-6;
+    padding-bottom: $spacer-3;
+
+    &:nth-child(2n) {
+        background-color: #f5f5f5;
+    }
+
+    .queue-post-image {
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .queue-post-metadata {
+        .form-checkbox {
+            margin-left: $spacer;
+            margin-right: $spacer-2;
+        }
+
+        textarea {
+            width: 600px;
+        }
+    }
+}

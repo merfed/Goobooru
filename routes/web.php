@@ -21,6 +21,8 @@ Route::get('/posts/random', 'Boorus@random')->name('random');
 // Route::get('/posts/urls', 'Controller@urls')->name('urlPosts');
 Route::get('/posts/dcma', 'Boorus@dcma')->name('dcma');
 Route::get('/posts/tos', 'Boorus@tos')->name('tos');
+Route::get('/posts/queue', 'Boorus@queue')->name('queue');
+Route::post('/posts/queue/{id}', 'Boorus@processQueue')->name('processQueue');
 // Route::get('/posts/help', 'Boorus@help')->name('help');
 
 Route::get('/post/{id}', 'Boorus@post')->name('post');

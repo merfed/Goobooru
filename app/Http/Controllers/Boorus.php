@@ -83,6 +83,27 @@ class Boorus extends Controller
         return redirect()->back()->with('success', 'Your image has been uploaded successfully.');
     }
 
+    public function queue()
+    {
+        return view('posts.queue', ['posts' => Booru::doesntHave('tags')->paginate(20)]);
+    }
+
+    public function processQueue(Booru $id, Request $request)
+    {
+        $this->validate($request, [
+            'tags' => 'required',
+            'rating' => 'required'
+        ]);
+
+        if (!Tags::hasEnoughTags(request('tags'))) {
+            return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>'. config('goobooru.min_tags') .'</b>');
+        }
+
+        Tags::processTags(request('tags'), $id);
+
+        return back()->with('success', 'You have successfully processed the image in the queue.');
+    }
+
     public function checkImage($image)
     {
         // md5 desired file
