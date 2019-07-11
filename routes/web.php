@@ -19,9 +19,9 @@ Route::post('/posts/upload', 'Boorus@store')->name('uploadPost');
 // Route::get('/posts/hot', 'Controller@hot')->name('hotPosts');
 // Route::get('/posts/random', 'Controller@random')->name('randomPosts');
 // Route::get('/posts/urls', 'Controller@urls')->name('urlPosts');
-// Route::get('/posts/dcma', 'Controller@dcma')->name('dcma');
-// Route::get('/posts/tos', 'Controller@tos')->name('tos');
-// Route::get('/posts/help', 'Controller@help')->name('help');
+Route::get('/posts/dcma', 'Boorus@dcma')->name('dcma');
+Route::get('/posts/tos', 'Boorus@tos')->name('tos');
+// Route::get('/posts/help', 'Boorus@help')->name('help');
 
 // Route::get('/notes', 'Notes@index')->name('notes');
 

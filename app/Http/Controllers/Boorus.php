@@ -16,6 +16,16 @@ class Boorus extends Controller
         ]);
     }
 
+    public function tos()
+    {
+        return view('posts.tos');
+    }
+
+    public function dcma()
+    {
+        return view('posts.dcma');
+    }
+
     public function create()
     {
         return view('upload');
