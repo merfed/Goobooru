@@ -1,6 +1,6 @@
 <div class="secondary-header d-flex flex-items-center">
     <nav class="d-flex secondary-nav">
-        <a href="#">List</a>
+        <a href="#" class="{{ request()->is('posts') ? 'active' : '' }}">List</a>
         <a href="{{ route('upload') }}" class="{{ request()->is('posts/upload') ? 'active' : '' }}">Upload</a>
         <a href="#">Hot</a>
         <a href="#">Random</a>

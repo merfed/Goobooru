@@ -20,6 +20,7 @@ class Hive extends Migration
         Schema::create('boorus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image')->unique();
+            $table->string('title')->nullable();
             $table->string('source')->nullable();
             $table->integer('uploader_id');
             $table->integer('rating')->default('1');
@@ -84,5 +85,7 @@ class Hive extends Migration
         Schema::dropIfExists('tags');
         Schema::dropIfExists('favs');
         Schema::dropIfExists('pools');
+        Schema::dropIfExists('boorus_tags');
+        Schema::dropIfExists('hashes');
     }
 }

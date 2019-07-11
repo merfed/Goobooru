@@ -22,7 +22,7 @@
         <tr>
             <td>
                 <div class="d-flex flex-items-center">
-                    <a href="#" class="flex-auto">{{ $tag->name }} <span style="color: #ddd; font-size: 12px;">({{ number_format(mt_rand(0,23543)) }})</span></a>
+                    <a href="#" class="flex-auto">{{ $tag->name }} <span style="color: #ccc; font-size: 12px;">({{ number_format($tag->posts_count) }})</span></a>
 
                     <a href="#" class="tag-edit">Edit</a>
                     <a href="#" class="tag-delete">Delete</a>

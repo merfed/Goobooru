@@ -19,16 +19,14 @@
 
         @include('partials.alerts')
 
-        <div class="wrapper">
+        <div class="wrapper d-flex">
 
             <div class="sidebar">
                 @yield('sidebar')
             </div>
 
-            <div class="wrapper-masonry content">
-                <div id="masonry">
-                    @yield('content')
-                </div>
+            <div class="content">
+                @yield('content')
             </div>
 
         </div>

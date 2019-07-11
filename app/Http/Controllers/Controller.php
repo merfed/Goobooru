@@ -17,8 +17,5 @@ class Controller extends BaseController
         return view('upload');
     }
 
-    public function upload()
-    {
-        return view('upload');
-    }
+
 }

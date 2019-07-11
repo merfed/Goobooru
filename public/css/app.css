@@ -2454,6 +2454,7 @@ pre {
 
 .secondary-header .secondary-nav a.active {
   font-weight: bold;
+  color: #ffbfd4;
 }
 
 .upload-guidelines {
@@ -2475,6 +2476,13 @@ pre {
 .sidebar {
   width: 10%;
   margin-right: 20px;
+  border-right: 1px solid #e1e4e8;
+}
+
+.sidebar .sidebar-tags {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .content {
@@ -2488,7 +2496,6 @@ pre {
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
   grid-gap: var(--gap);
-  padding: 2rem;
 }
 
 .masonry-layout > div > img,

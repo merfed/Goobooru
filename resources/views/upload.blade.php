@@ -27,7 +27,9 @@
         <p><b>If your image returns that it is a duplicate, that means it already exists! Help by updating any info you have.</b></p>
     </div>
 
-    <form>
+    <form method="POST" action="{{ route('uploadPost') }}" enctype="multipart/form-data" files="true">
+        @csrf
+
         <dl class="form-group">
             <dt><label for="file">File</label></dt>
             <dd><input class="form-control input-block" type="file" name="file"></dd>

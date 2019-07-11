@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tagged;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class Tags extends Controller
 {
     public function index()
     {
-        return view('tags.list', ['tags' => Tag::paginate(40)]);
+        return view('tags.list', ['tags' => Tag::withCount('posts')->paginate(40)]);
     }
 
     public function create()
@@ -23,7 +24,7 @@ class Tags extends Controller
             'tags' => 'required'
         ]);
 
-        return $this->processTags(request('tags'));
+        return self::processTags(request('tags'));
     }
 
     public function edit()
@@ -36,12 +37,12 @@ class Tags extends Controller
 
     }
 
-    public function hasEnoughTags($tags)
+    public static function hasEnoughTags($tags)
     {
-        return (count($tags) >= config('goobooru.min_tags'));
+        return (count(explode(',', $tags)) >= config('goobooru.min_tags'));
     }
 
-    public function processTags($tags, $booru = null)
+    public static function processTags($tags, $booru = null)
     {
         $tags = rtrim($tags, ',');
         $tags = explode(',', $tags);

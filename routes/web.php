@@ -13,9 +13,9 @@
 
 Route::get('/', 'Landing@index')->name('landing');
 
-Route::get('/posts', 'Controller@index')->name('posts');
-Route::get('/posts/upload', 'Controller@upload')->name('upload');
-// Route::post('/posts/upload', 'Controller@store')->name('uploadPost');
+Route::get('/posts', 'Boorus@index')->name('posts');
+Route::get('/posts/upload', 'Boorus@create')->name('upload');
+Route::post('/posts/upload', 'Boorus@store')->name('uploadPost');
 // Route::get('/posts/hot', 'Controller@hot')->name('hotPosts');
 // Route::get('/posts/random', 'Controller@random')->name('randomPosts');
 // Route::get('/posts/urls', 'Controller@urls')->name('urlPosts');
