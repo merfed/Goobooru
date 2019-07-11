@@ -20,7 +20,7 @@
     <li><b>By:</b> someone</li>
     <li><b>Source:</b> {{ $post->source }}</li>
     <li><b>Rating:</b> {{ $post->getRating() }}</li>
-    <li><b>Score:</b> {{ $post->score }}</li>
+    <li><b>Score:</b> {{ $post->score }} <a href="#">&#x1F839;</a> <a href="#">&#x1F83B;</a></li>
 </ul>
 
 <h4 class="mb-2">Options</h4>
