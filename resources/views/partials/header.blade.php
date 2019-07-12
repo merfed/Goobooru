@@ -4,13 +4,13 @@
     </div>
 
     <nav class="nav d-flex flex-auto">
-        <a href="{{ route('posts') }}" class="{{ (request()->is('posts*') || request()->is('posts/*') || request()->is('post/*')) ? 'active' : '' }}">Posts</a>
+        <a href="{{ route('posts') }}" class="{{ (request()->is('posts') || request()->is('posts/*') || request()->is('post/*')) ? 'active' : '' }}">Posts</a>
         <a href="{{ route('tags') }}" class="{{ (request()->is('tags') || request()->is('tags/*')) ? 'active' : '' }}">Tags</a>
         <a href="{{ route('pools') }}" class="{{ (request()->is('pools') || request()->is('pools/*')) ? 'active' : '' }}">Pools</a>
         <a href="#" class="{{ request()->is('notes') ? 'active' : '' }}">Notes</a>
         <a href="#" class="{{ request()->is('comments') ? 'active' : '' }}">Comments</a>
         <a href="#" class="{{ request()->is('wiki') ? 'active' : '' }}">Wiki</a>
-        <a href="#" class="{{ request()->is('forum') ? 'active' : '' }}">Forum</a>
+        <a href="{{ route('forum') }}" class="{{ (request()->is('forum') || request()->is('forum/*')) ? 'active' : '' }}">Forum</a>
     </nav>
 
     @if (Auth::user())

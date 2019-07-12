@@ -79,6 +79,36 @@ class Hive extends Migration
             $table->integer('pool_id');
             $table->timestamps();
         });
+
+        Schema::create('forum_categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('color');
+            $table->string('url');
+            $table->timestamps();
+        });
+
+        Schema::create('forum_threads', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->integer('user_id');
+            $table->integer('category_id');
+            $table->boolean('locked')->default('0');
+            $table->boolean('deleted')->default('0');
+            $table->boolean('pinned')->default('0');
+            $table->timestamps();
+        });
+
+        Schema::create('forum_comments', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('body');
+            $table->integer('user_id');
+            $table->integer('thread_id');
+            $table->boolean('as_admin')->default('0');
+            $table->boolean('as_mod')->default('0');
+            $table->boolean('deleted')->default('0');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -95,5 +125,8 @@ class Hive extends Migration
         Schema::dropIfExists('boorus_tags');
         Schema::dropIfExists('boorus_pools');
         Schema::dropIfExists('hashes');
+        Schema::dropIfExists('forum_categories');
+        Schema::dropIfExists('forum_threads');
+        Schema::dropIfExists('forum_comments');
     }
 }

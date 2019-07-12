@@ -69,3 +69,12 @@ Route::group(['prefix' => 'tag', 'middleware' => ['web']], function() {
 Auth::routes();
 
 Route::get('/profile/{id}', 'Users@profile')->name('profile');
+
+Route::group(['prefix' => 'forum', 'middleware' => ['web', 'auth']], function() {
+    Route::get('/', 'Forums@index')->name('forum');
+    Route::get('/new', 'Forums@create')->name('newThread');
+    Route::post('/new', 'Forums@store')->name('postNewThread');
+    Route::get('/t/{id}', 'Forums@view')->name('forumThread');
+    Route::post('/t/{id}', 'Forums@reply')->name('reply');
+    Route::get('/b/{id}', 'Forums@category')->name('forumCategory');
+});

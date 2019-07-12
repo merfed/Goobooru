@@ -961,3 +961,228 @@ pre {
         margin-bottom: $spacer-4;
     }
 }
+
+//
+// Forum
+//
+.forum-sidebar,
+.forum-main {
+    font-family: arial;
+    font-size: 12px;
+}
+
+.forum-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    margin-right: $spacer-2;
+
+    .threads {
+        background: #fee9ee;
+        padding: $spacer-2;
+
+        h3 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        ul {
+            padding-bottom: $spacer-2;
+            margin-top: $spacer-2;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                margin: ($spacer / 2) 0;
+            }
+        }
+
+        .thread-categories {
+            font-size: 10px;
+            border-bottom: 1px dotted #959595;
+            color: #777;
+
+            a {
+                text-transform: uppercase;
+            }
+        }
+
+        .thread-search {
+            margin-top: $spacer-2;
+            margin-bottom: $spacer-2;
+
+            input {
+                width: 100%;
+                border: 1px solid $gray-300;
+                border-radius: 3px;
+                padding: 2px 4px;
+
+                &:focus {
+                    border-color: #e865ae;
+                    outline: none;
+                    box-shadow: $form-control-shadow, 0 0 0 0.2em rgba(214, 3, 71, 0.3);
+                }
+            }
+        }
+    }
+}
+
+.forum-headers {
+    padding: 0 $spacer;
+    margin: 0;
+    border-bottom: 1px solid #BBB;
+
+    div {
+        padding: 0;
+        color: #7e7e7e;
+        font-size: 9px;
+        line-height: 27px;
+    }
+}
+
+.forum-top {
+    padding: $spacer;
+    margin-bottom: 2px;
+    border-bottom: 1px dotted #959595;
+    display: flex;
+
+    .thread-bc {
+        font-size: 10px;
+        color: #7e7e7e;
+        margin: 0 0 0 2px;
+    }
+
+    .thread-pagination {
+        font-size: 10px;
+        color: #7e7e7e;
+
+        a {
+            border: 1px solid #494949;
+            padding: 2px 4px;
+            margin-right: 5px;
+            color: #494949;
+        }
+
+        .gap {
+            margin-right: 5px;
+        }
+
+        .current {
+            color: #fff;
+            border: 1px solid #7e7e7e;
+            background: #7e7e7e;
+            padding: 2px 4px;
+            margin-right: 5px;
+        }
+    }
+
+    .new-thread {
+        color: #fff;
+        font-weight: bold;
+        background: #dd5280;
+        padding: ($spacer / 2) $spacer-2;
+
+        &:hover {
+            background: #ff8cb2;
+        }
+    }
+}
+
+.forum-headers-main,
+.forum-thread-main {
+    width: 55%;
+}
+
+.forum-headers-starter,
+.forum-headers-last,
+.forum-thread-starter,
+.forum-thread-last {
+    width: 20%;
+}
+
+.forum-headers-replies,
+.forum-thread-replies {
+    width: 5%;
+}
+
+.forum-thread {
+    padding: 6px $spacer;
+    margin: 2px 0;
+    background: #fef9fe;
+    font-size: 12px;
+    border-bottom: 1px solid #f9accf;
+
+    &:nth-child(2n) {
+        background: #fef5fa;
+    }
+
+    .forum-thread-main a,
+    .forum-thread-starter a,
+    .forum-thread-last a {
+        font-weight: 700;
+        text-decoration: underline;
+        color: #494949;
+
+        &:hover {
+            background: #494949;
+            color: #fff;
+        }
+    }
+
+    .forum-thread-main a.muted {
+        color: #959595;
+        font-style: 10px;
+        font-weight: normal;
+        text-decoration: none;
+    }
+
+    .more {
+        display: block;
+        font-size: 10px;
+        color: #959595;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+.thread {
+    color: #494949;
+
+    .main-title {
+        border-bottom: 1px dotted #959595;
+        line-height: 40px;
+
+        h3 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+
+    .forum-comment {
+        padding: 6px $spacer;
+        margin: 2px 0;
+        background: #fef9fe;
+        font-size: 12px;
+        border-bottom: 1px solid #f9accf;
+
+        &:nth-child(2n) {
+            background: #fef5fa;
+        }
+
+        .forum-comment-sidebar {
+            width: 150px;
+            flex-shrink: 0;
+
+            .username {
+                font-weight: bold;
+            }
+
+            .when {
+                color: #888;
+                font-size: 10px;
+            }
+        }
+    }
+}
