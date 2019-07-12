@@ -11,7 +11,7 @@ class Boorus extends Controller
     public function index()
     {
         return view('posts.index', [
-            'tags' => Tag::withCount('posts')->latest()->take(40)->get(),
+            'tags' => Tag::defaultListing(),
             'posts' => Booru::latest()->paginate(config('goobooru.paginate'))
         ]);
     }
@@ -38,7 +38,7 @@ class Boorus extends Controller
     public function hot()
     {
         return view('posts.index', [
-            'tags' => Tag::withCount('posts')->latest()->take(40)->get(),
+            'tags' => Tag::defaultListing(),
             'posts' => Booru::where('views', '>', config('goobooru.hot_threshold'))->paginate(config('goobooru.paginate'))
         ]);
     }

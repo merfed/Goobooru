@@ -25,4 +25,9 @@ class Tag extends Model
 
         return $type[$this->type];
     }
+
+    public static function defaultListing()
+    {
+        return Tag::withCount('posts')->latest()->take(40)->get();
+    }
 }
