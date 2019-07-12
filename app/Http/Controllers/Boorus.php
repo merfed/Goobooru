@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Booru;
 use App\Tag;
+use App\Fav;
 use Illuminate\Http\Request;
 
 class Boorus extends Controller
@@ -142,5 +143,34 @@ class Boorus extends Controller
                 Tags::processMeta(request($type), $id, $booru);
             }
         }
+    }
+
+    public function fav(Booru $id)
+    {
+        $check = Fav::where('image_id', $id->id)->where('user_id', Auth::user()->id)->first();
+
+        if ($check != null) {
+            return back()->with('error', 'This post has already been favorited.');
+        }
+
+        Fav::create([
+            'image_id' => $id->id,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return back()->with('success', 'This post has been added to your favorites.');
+    }
+
+    public function unfav(Booru $id)
+    {
+        $check = Fav::where('image_id', $id->id)->where('user_id', Auth::user()->id)->first();
+
+        if ($check == null) {
+            return back()->with('error', 'This post does not exist in your favorites.');
+        }
+
+        $check->delete();
+
+        return back()->with('success', 'This post removed from your favorites.');
     }
 }

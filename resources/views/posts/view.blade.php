@@ -57,7 +57,7 @@
 @endif
 
 <div class="actions" style="margin: 16px 0;">
-    <a href="#">Edit</a> | <a href="#">Favorite</a> | <a href="#">Flag</a>
+    <a href="#">Edit</a> | @if ($post->isFavorited()) <a href="{{ route('unfav', ['id' => $post->id]) }}">Remove from Favorites</a> @else <a href="{{ route('fav', ['id' => $post->id]) }}">Favorite</a> @endif | <a href="#">Flag</a>
 </div>
 
 <div class="container-sm comments" style="margin: 30px 0;">

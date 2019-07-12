@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Booru extends Model
@@ -52,5 +53,12 @@ class Booru extends Model
     public function getFileType()
     {
         return pathinfo(asset('uploads/'. $this->image), PATHINFO_EXTENSION);
+    }
+
+    public function isFavorited()
+    {
+        $check = \App\Fav::where('image_id', $this->id)->where('user_id', Auth::user()->id)->first();
+
+        return ($check != null) ? true : false;
     }
 }
