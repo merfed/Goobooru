@@ -11,4 +11,9 @@ class Users extends Controller
     {
         return view('profile', ['user' => $id]);
     }
+
+    public function settings()
+    {
+        return view('user.settings');
+    }
 }
