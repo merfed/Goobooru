@@ -30,7 +30,7 @@
     <li><b>Posted:</b> {{ $post->created_at->diffForHumans() }}</li>
     <li><b>By:</b> {!! ($post->uploader_id == 0) ? '<i>System</i>' : '<a href="'. route('profile', ['id' => $post->uploader->id]) .'">'. $post->uploader->name .'</a>' !!}</li>
     <li><b>Source:</b> {{ $post->source }}</li>
-    <li><b>Rating:</b> {{ $post->getRating() }}</li>
+    <li><b>Rating:</b> <span class="rating-{{ $post->getRating(true) }}">{{ $post->getRating() }}</span></li>
     <li><b>Score:</b> {{ $post->score }} <a href="#">&#x1F839;</a> <a href="#">&#x1F83B;</a></li>
 </ul>
 

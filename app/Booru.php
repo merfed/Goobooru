@@ -39,7 +39,7 @@ class Booru extends Model
         return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 4)->withCount('posts');
     }
 
-    public function getRating()
+    public function getRating($lowercase = false)
     {
         $ratings = [
             1 => 'Safe',
@@ -47,7 +47,7 @@ class Booru extends Model
             3 => 'Explicit'
         ];
 
-        return $ratings[$this->rating];
+        return ($lowercase) ? strtolower($ratings[$this->rating]) : $ratings[$this->rating];
     }
 
     public function getFileType()

@@ -7002,6 +7002,18 @@ pre {
   color: #00a;
 }
 
+.rating-safe {
+  color: #6ba4ff;
+}
+
+.rating-questionable {
+  color: #ffa96b;
+}
+
+.rating-explicit {
+  color: #ff6b7a;
+}
+
 .landing {
   width: 540px;
   margin: 80px auto 0 auto;
