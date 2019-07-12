@@ -6962,10 +6962,14 @@ pre {
   background: #f5f5f5;
 }
 
+.tags-table tr:hover {
+  background: #fff8c4;
+}
+
 .tags-table tr:hover .tag-edit,
 .tags-table tr:hover .tag-delete {
   display: inline;
-  margin-right: 4px;
+  margin-right: 8px;
 }
 
 .tags-table .tag-edit,

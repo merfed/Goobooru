@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tagged;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class Tags extends Controller
 {
@@ -32,14 +33,29 @@ class Tags extends Controller
         return view('tags.edit', ['tag' => $tag]);
     }
 
+    public function change(Tag $tag, Request $request)
+    {
+        $this->validate($request, [
+            'old' => 'required',
+            'name' => [
+                'required',
+                Rule::unique('tags')->ignore($tag->id),
+            ]
+        ]);
+
+        if ($tag->name != request('old')) {
+            return back()->with('error', 'Please don\'t change the original tag name.');
+        }
+
+        $tag->name = request('name');
+        $tag->save();
+
+        return redirect()->route('tags')->with('success', 'The tag <b>'. request('old') .'</b> has been changed to <b>'. request('name') .'</b>.');
+    }
+
     public function destroy(Tag $tag)
     {
         return view('tag.delete', ['tag' => $tag]);
-    }
-
-    public function view(Tag $tag)
-    {
-        return view('tag.view', ['tag' => $tag]);
     }
 
     public function getPosts(Tag $tag)

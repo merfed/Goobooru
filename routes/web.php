@@ -62,6 +62,8 @@ Route::group(['prefix' => 'tags', 'middleware' => ['web', 'auth']], function() {
 
 Route::group(['prefix' => 'tag', 'middleware' => ['web']], function() {
     Route::get('/{tag}', 'Tags@getPosts')->name('tagPosts');
+    Route::get('/{tag}/edit', 'Tags@edit')->name('editTag');
+    Route::post('/{tag}/edit', 'Tags@change')->name('postEditTag');
 });
 
 // Route::get('/notes', 'Notes@index')->name('notes');

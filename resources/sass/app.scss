@@ -698,10 +698,12 @@ pre {
         }
 
         &:hover {
+            background: #fff8c4;
+
             .tag-edit,
             .tag-delete {
                 display: inline;
-                margin-right: 4px;
+                margin-right: 8px;
             }
         }
     }
