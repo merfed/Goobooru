@@ -6667,7 +6667,8 @@ pre {
 }
 
 .profile-sidebar {
-  width: 225px;
+  width: 225px !important;
+  flex-shrink: 0;
   padding: 0 16px 0 0;
   border-right: 1px solid #e1e4e8;
 }

@@ -921,7 +921,8 @@ pre {
 // Profile
 //
 .profile-sidebar {
-    width: 225px;
+    width: 225px !important;
+    flex-shrink: 0;
     padding: 0 $spacer-3 0 0;
     border-right: 1px solid $gray-200;
 
