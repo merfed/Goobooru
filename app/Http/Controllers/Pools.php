@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Pool;
+use App\Pooled;
 use Illuminate\Http\Request;
 
 class Pools extends Controller
@@ -26,7 +29,7 @@ class Pools extends Controller
         $pool = Pool::create([
             'name' => request('name'),
             'description' => request('description'),
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
             'visible' => request('visible')
         ]);
 

@@ -68,7 +68,6 @@ class Hive extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->integer('image_id');
             $table->integer('user_id');
             $table->boolean('visible')->default('1');
             $table->timestamps();

@@ -16,13 +16,13 @@ Route::get('/', 'Landing@index')->name('landing');
 
 
 Route::group(['prefix' => 'posts', 'middleware' => ['web']], function() {
-    Route::get('/posts', 'Boorus@index')->name('posts');
-    Route::get('/posts/hot', 'Boorus@hot')->name('hotPosts');
-    Route::get('/posts/random', 'Boorus@random')->name('random');
-    // Route::get('/posts/urls', 'Controller@urls')->name('urlPosts');
-    Route::get('/posts/dcma', 'Boorus@dcma')->name('dcma');
-    Route::get('/posts/tos', 'Boorus@tos')->name('tos');
-    // Route::get('/posts/help', 'Boorus@help')->name('help');
+    Route::get('/', 'Boorus@index')->name('posts');
+    Route::get('/hot', 'Boorus@hot')->name('hotPosts');
+    Route::get('/random', 'Boorus@random')->name('random');
+    // Route::get('/urls', 'Controller@urls')->name('urlPosts');
+    Route::get('/dcma', 'Boorus@dcma')->name('dcma');
+    Route::get('/tos', 'Boorus@tos')->name('tos');
+    // Route::get('/help', 'Boorus@help')->name('help');
 });
 
 Route::group(['prefix' => 'posts', 'middleware' => ['web', 'auth']], function() {

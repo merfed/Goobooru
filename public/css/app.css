@@ -6307,7 +6307,8 @@ pre {
   font-weight: bold;
 }
 
-.header .login {
+.header .login,
+.header .register {
   margin: 0 16px;
   font-weight: bold;
   color: #fff;

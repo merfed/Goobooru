@@ -549,11 +549,12 @@ pre {
         }
     }
 
-    .login {
+    .login, .register {
         margin: 0 $spacer-3;
         font-weight: bold;
         color: #fff;
     }
+
 
     .user {
         margin: 0 $spacer-3;
