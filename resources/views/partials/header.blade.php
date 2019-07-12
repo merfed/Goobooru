@@ -13,9 +13,19 @@
         <a href="#" class="{{ request()->is('forum') ? 'active' : '' }}">Forum</a>
     </nav>
 
-    <a href="#" class="login">Login</a>
+    @if (Auth::user())
+    <div class="user dropdown">
+        <span class="label">{{ Auth::user()->name }}</span>
+        <span class="burgerbutton">OKAY</span>
+        <ul class="items-list">
+            <li class="item"><a href="#">Profile</a></li>
+            <li class="item"><a href="#">Logout</a></li>
+        </ul>
+    </div>
+    @else
+    <a href="{{ route('login') }}" class="login">Login</a> | <a href="{{ route('register') }}" class="register">Register</a>
+    @endif
 </div>
-
 @if (! isset($type))
 
 @elseif ($type == 'notes')

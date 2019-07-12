@@ -44,3 +44,7 @@ Route::get('/tags/bulk', 'Tags@create')->name('tagsBulk');
 Route::post('/tags/bulk', 'Tags@store')->name('tagsBulkPost');
 
 Route::get('/tag/{tag}', 'Tags@getPosts')->name('tagPosts');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -54,3 +54,18 @@ var fecthMasonry = function (container, items, columns) {
 };
 
 fecthMasonry('masonry', 'image', 8);
+
+window.addEventListener('DOMContentLoaded', () => {
+
+  const $dropdown = document.querySelector('.dropdown');
+  const $burgerButton = $dropdown.querySelector('.burgerbutton');
+  const $containerItems = $dropdown.querySelector('.items-list');
+
+  $burgerButton.addEventListener('click', ($event) => {
+    $containerItems.classList.toggle('open');
+  });
+
+  document.addEventListener('click', ($event) =>
+  $event.target !== $burgerButton &&
+  $containerItems.classList.remove('open'));
+});

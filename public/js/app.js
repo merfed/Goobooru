@@ -49380,6 +49380,17 @@ var fecthMasonry = function fecthMasonry(container, items, columns) {
 };
 
 fecthMasonry('masonry', 'image', 8);
+window.addEventListener('DOMContentLoaded', function () {
+  var $dropdown = document.querySelector('.dropdown');
+  var $burgerButton = $dropdown.querySelector('.burgerbutton');
+  var $containerItems = $dropdown.querySelector('.items-list');
+  $burgerButton.addEventListener('click', function ($event) {
+    $containerItems.classList.toggle('open');
+  });
+  document.addEventListener('click', function ($event) {
+    return $event.target !== $burgerButton && $containerItems.classList.remove('open');
+  });
+});
 
 /***/ }),
 
