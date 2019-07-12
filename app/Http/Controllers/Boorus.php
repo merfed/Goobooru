@@ -30,7 +30,8 @@ class Boorus extends Controller
     public function random()
     {
         return view('posts.view', [
-            'post' => Booru::all()->random()
+            'post' => Booru::all()->random(),
+            'metas' => ['artists', 'characters', 'copyrights', 'years']
         ]);
     }
 
