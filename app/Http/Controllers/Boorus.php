@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Booru;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -82,7 +83,7 @@ class Boorus extends Controller
 
         $booru = Booru::create([
             'image' => $name,
-            'uploader_id' => 1,
+            'uploader_id' => Auth::user()->id,
             'source' => trim(request('source')),
             'title' => trim(request('title')),
             'rating' => request('rating'),

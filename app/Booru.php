@@ -8,6 +8,11 @@ class Booru extends Model
 {
     protected $guarded = ['id'];
 
+    public function uploader()
+    {
+        return $this->hasOne('App\User', 'id', 'uploader_id');
+    }
+
     public function tags()
     {
         return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 0)->withCount('posts');

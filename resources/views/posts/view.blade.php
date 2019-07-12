@@ -28,7 +28,7 @@
 <ul style="list-style-type: none;" class="mb-6">
     <li><b>ID:</b> {{ $post->id }}</li>
     <li><b>Posted:</b> {{ $post->created_at->diffForHumans() }}</li>
-    <li><b>By:</b> someone</li>
+    <li><b>By:</b> {!! ($post->uploader_id == 0) ? '<i>System</i>' : '<a href="'. route('profile', ['id' => $post->uploader->id]) .'">'. $post->uploader->name .'</a>' !!}</li>
     <li><b>Source:</b> {{ $post->source }}</li>
     <li><b>Rating:</b> {{ $post->getRating() }}</li>
     <li><b>Score:</b> {{ $post->score }} <a href="#">&#x1F839;</a> <a href="#">&#x1F83B;</a></li>
