@@ -45,7 +45,7 @@ class Forums extends Controller
 
     public function view(ForumThread $id)
     {
-        return view('forum.thread', ['thread' => $id, 'comments' => $id->comments()->oldest()->paginate(2)]);
+        return view('forum.thread', ['thread' => $id, 'comments' => $id->comments()->oldest()->paginate(50)]);
     }
 
     public function reply(ForumThread $id, Request $request)

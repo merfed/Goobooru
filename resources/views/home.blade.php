@@ -7,7 +7,7 @@
     <div class="landing-nav">
         <a href="{{ route('posts') }}"><b>Posts</b></a>
         <a href="#">Comments</a>
-        <a href="#">Forum</a>
+        <a href="{{ route('forum') }}">Forum</a>
         <a href="#">Wiki</a>
         <a href="#">My Account</a>
         <a href="#">»</a>

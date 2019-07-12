@@ -51,6 +51,9 @@ This is just for dev installations, I don't advice production ones since this is
 * Comments
 * Wiki
 * Forum
+    * Pagination on thread
+    * Searching
+    * View all posts in a category
 * User
     * Settings
     * Better dropdown options
