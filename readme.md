@@ -17,9 +17,53 @@ This is just for dev installations, I don't advice production ones since this is
 * ```npm run watch```
 * ```npm run watch``` again, usually because the first time it installs browserSync. Ignore this if your browser opens up to the page.
 
+# Todo
+* General
+    * Tag ? link to wiki for that tag
+* Posts
+    * DCMA creates something staff can see.
+    * URLs page with indicator for dead urls
+    * Saved searches
+    * Help page
+    * Redesign upload
+* Post
+    * Size statistics
+    * Up and down vote
+    * Rating styling
+    * Edit
+    * Delete
+    * Flag for deletion
+    * Add note
+    * Fav
+    * Lock
+* Tags
+    * Edit
+    * Delete
+    * Hide bulk add for staff only
+    * Implications
+    * Saved searches
+* Pools
+    * Better design
+    * View all images in pools
+    * Edit
+    * Delete
+* Notes
+* Comments
+* Wiki
+* Forum
+* User
+    * Settings
+    * Better dropdown options
+    * Profile
+        * Stats work
+        * Recent favorites
+        * Somehow get 2 masonrys working on one page
+
 # Roadmap
 
 This is for stuff that isn't obvious because there's currently nothing in the views to suggest it should be there.
 
 * Bulk add comments of specific types.
 * Color staff links as yellow.
+* User class system
+* Search
