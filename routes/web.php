@@ -47,4 +47,4 @@ Route::get('/tag/{tag}', 'Tags@getPosts')->name('tagPosts');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile/{id}', 'Users@profile')->name('profile');

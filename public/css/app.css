@@ -6614,11 +6614,6 @@ pre {
   padding: 1rem;
 }
 
-.dropdown.open {
-  background: #fff;
-  color: #e865ae;
-}
-
 .dropdown > .burgerbutton {
   cursor: pointer;
 }
@@ -6669,5 +6664,45 @@ pre {
 
 .items-list.open {
   display: block;
+}
+
+.profile-sidebar {
+  width: 225px;
+  padding: 0 16px 0 0;
+  border-right: 1px solid #e1e4e8;
+}
+
+.profile-sidebar h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.profile-sidebar .user-stats {
+  margin-top: 32px;
+}
+
+.profile-sidebar .user-stats h5 {
+  margin-bottom: 8px;
+}
+
+.profile-sidebar .user-stats .user-stats-stat {
+  color: #333;
+}
+
+.profile-sidebar .user-stats .user-stat-value {
+  color: #6a737d;
+}
+
+.profile-content {
+  margin: 0 16px;
+}
+
+.profile-content .section-header {
+  font-weight: bold;
+  font-size: 2em;
+  border-bottom: 1px solid #e1e4e8;
+  width: 100%;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
 }
 
