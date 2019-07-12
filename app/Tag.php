@@ -26,6 +26,19 @@ class Tag extends Model
         return $type[$this->type];
     }
 
+    public function getHumanReadableType()
+    {
+        $type = [
+            0 => 'General',
+            1 => 'Artist',
+            2 => 'Character',
+            3 => 'Copyright',
+            4 => 'Year'
+        ];
+
+        return $type[$this->type];
+    }
+
     public static function defaultListing()
     {
         return Tag::withCount('posts')->latest()->take(40)->get();

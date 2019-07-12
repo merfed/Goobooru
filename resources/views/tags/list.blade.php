@@ -14,7 +14,8 @@
 
 <table class="tags-table" style="width: 100%; text-align: left;">
     <thead>
-        <th style="width: 90%;">Tag</th>
+        <th style="width: 80%;">Tag</th>
+        <th style="width: 10%;">Type</th>
         <th style="width: 10%;">Created</th>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
                     <a href="#" class="tag-delete">Delete</a>
                 </div>
             </td>
+            <td>{{ $tag->getHumanReadableType() }}</td>
             <td>{{ $tag->created_at->diffForHumans() }}</td>
         </tr>
         @endforeach
