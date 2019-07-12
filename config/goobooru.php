@@ -20,6 +20,16 @@ return [
         8 => '#c74720',
         9 => '#c77e20',
     ],
+    'user_classes' => [
+        0 => 'Member',
+        1 => 'Power User',
+        2 => 'Elite',
+        3 => 'Legend',
+        4 => 'Master',
+        99 => 'Moderator',
+        100 => 'Admin',
+        101 => 'Op'
+    ],
     'paginate' => 24, // We do columns of 8, so a divisible value makes it look nice
     'hot_threshold' => 25, // Number of views to show up on the hot page
 

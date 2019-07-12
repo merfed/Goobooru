@@ -41,4 +41,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Booru', 'uploader_id');
     }
+
+    public function threads() {
+        return $this->hasMany('App\ForumThread');
+    }
+
+    public function replies() {
+        return $this->hasMany('App\ForumComment');
+    }
+
 }
