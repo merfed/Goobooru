@@ -42,6 +42,14 @@ class Tags extends Controller
         return view('tag.view', ['tag' => $tag]);
     }
 
+    public function getPosts(Tag $tag)
+    {
+        return view('posts.index', [
+            'tags' => Tag::withCount('posts')->latest()->take(40)->get(),
+            'posts' => $tag->posts()->paginate(config('goobooru.paginate'))
+        ]);
+    }
+
     public static function hasEnoughTags($tags)
     {
         return (count(explode(',', $tags)) >= config('goobooru.min_tags'));
