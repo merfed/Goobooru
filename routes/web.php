@@ -69,6 +69,8 @@ Route::group(['prefix' => 'tag', 'middleware' => ['web']], function() {
 Auth::routes();
 
 Route::get('/profile/{id}', 'Users@profile')->name('profile');
+Route::get('/settings', 'Users@settings')->name('userSettings');
+Route::post('/settings/avatar', 'Users@uploadAvatar')->name('postAvatar');
 
 Route::group(['prefix' => 'forum', 'middleware' => ['web', 'auth']], function() {
     Route::get('/', 'Forums@index')->name('forum');

@@ -38,6 +38,10 @@
                 <div class="forum-comment-sidebar">
                     <a class="username" href="{{ route('profile', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
                     <div class="when">{{ $comment->created_at->diffForHumans() }}</div>
+
+                    @if ($comment->user->avatar != null)
+                    <img width="50" height="50" src="{{ asset(config('goobooru.avatar_upload_path') .'/'. $comment->user->avatar) }}" alt="">
+                    @endif
                 </div>
                 <div class="forum-comment-content flex-auto">
                     {!! $comment->body !!}

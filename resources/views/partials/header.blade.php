@@ -19,6 +19,7 @@
         <span class="burgerbutton">OKAY</span>
         <ul class="items-list">
             <li class="item"><a href="{{ route('profile', ['id' => Auth::user()->id]) }}">Profile</a></li>
+            <li class="item"><a href="{{ route('userSettings') }}">Settings</a></li>
             <li class="item"><a href="#">Logout</a></li>
         </ul>
     </div>
