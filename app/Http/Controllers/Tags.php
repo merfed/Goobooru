@@ -75,7 +75,7 @@ class Tags extends Controller
     {
         $ignored = [];
         $tag = trim($tag);
-        $check = Tag::where('name', $tag)->first();
+        $check = Tag::where('name', $tag)->where('type', $type)->first();
 
         if ($tag !== '') {
             if ($check === null) {
