@@ -8,7 +8,7 @@
         @csrf
 
         <div class="auth-control-con">
-            <input id="email" type="email" class="auth-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
+            <input id="email" type="email" class="auth-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="E-mail" required autocomplete="email" autofocus>
 
             @error('email')
                 <span class="invalid-feedback" role="alert">

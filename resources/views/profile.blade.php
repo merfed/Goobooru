@@ -46,7 +46,22 @@
     <div class="profile-content flex-auto">
         <div class="section-header">Recent Favorites</div>
 
+
         <div class="section-header">Recent Uploads</div>
+
+        <div class="wrapper-masonry content">
+            <div id="masonry">
+                @foreach ($user->posts as $post)
+                <a href="{{ route('post', ['id' => $post->id]) }}" class="image">
+                    @if ($post->getFileType() == 'webm')
+                    <video controls loop="true" src="{{ asset('uploads/'.$post->image) }}"></video>
+                    @else
+                    <img src="{{ asset('uploads/'.$post->image) }}" alt="">
+                    @endif
+                </a>
+                @endforeach
+            </div>
+        </div>
     </div>
 </div>
 
