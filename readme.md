@@ -29,12 +29,10 @@ This is just for dev installations, I don't advice production ones since this is
 * Post
     * Size statistics
     * Up and down vote
-    * Rating styling
     * Edit
     * Delete
     * Flag for deletion
     * Add note
-    * Fav
     * Lock
 * Tags
     * Edit

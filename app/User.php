@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Booru', 'uploader_id');
     }
 
+    public function favs()
+    {
+        return $this->hasMany('App\Fav', 'user_id');
+    }
+
     public function threads() {
         return $this->hasMany('App\ForumThread');
     }

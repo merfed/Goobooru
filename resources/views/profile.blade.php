@@ -28,7 +28,7 @@
 
             <div class="d-flex user-stats-stat">
                 <div class="flex-auto user-stat">Favorites</div>
-                <div class="user-stat-value">0</div>
+                <div class="user-stat-value">{{ $user->favs->count() }}</div>
             </div>
 
             <div class="d-flex user-stats-stat">
