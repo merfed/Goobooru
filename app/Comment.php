@@ -12,4 +12,9 @@ class Comment extends Model
     {
         return $this->hasOne('App\User', 'id', 'user_id');
     }
+
+    public function post()
+    {
+        return $this->hasOne('App\Booru', 'id' ,'booru_id');
+    }
 }

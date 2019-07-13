@@ -1199,3 +1199,17 @@ pre {
         }
     }
 }
+
+.recent-comment {
+    margin-bottom: $spacer-4;
+    padding-bottom: $spacer-4;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid #d5d5d5;
+    }
+
+    .recent-comment-image {
+        width: 200px;
+        margin-right: $spacer-3;
+    }
+}

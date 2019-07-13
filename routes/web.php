@@ -58,6 +58,10 @@ Route::group(['prefix' => 'tags', 'middleware' => ['web']], function() {
     Route::get('/', 'Tags@index')->name('tags');
 });
 
+Route::group(['prefix' => 'comments', 'middleware' => ['web', 'auth']], function() {
+    Route::get('/', 'Comments@index')->name('comments');
+});
+
 Route::group(['prefix' => 'tags', 'middleware' => ['web', 'auth']], function() {
     Route::get('/bulk', 'Tags@create')->name('tagsBulk');
     Route::post('/bulk', 'Tags@store')->name('tagsBulkPost');

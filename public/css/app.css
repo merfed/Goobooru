@@ -7462,3 +7462,17 @@ pre {
   font-size: 10px;
 }
 
+.recent-comment {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+}
+
+.recent-comment:not(:last-child) {
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.recent-comment .recent-comment-image {
+  width: 200px;
+  margin-right: 16px;
+}
+

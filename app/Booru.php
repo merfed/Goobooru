@@ -14,6 +14,11 @@ class Booru extends Model
         return $this->hasOne('App\User', 'id', 'uploader_id');
     }
 
+    public function allTags()
+    {
+        return $this->belongsToMany('App\Tag', 'boorus_tags')->withCount('posts');
+    }
+
     public function tags()
     {
         return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 0)->withCount('posts');
