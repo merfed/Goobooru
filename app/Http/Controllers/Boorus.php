@@ -6,6 +6,7 @@ use Auth;
 use App\Booru;
 use App\Tag;
 use App\Fav;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class Boorus extends Controller
@@ -172,5 +173,20 @@ class Boorus extends Controller
         $check->delete();
 
         return back()->with('success', 'This post removed from your favorites.');
+    }
+
+    public function comment(Booru $id, Request $request)
+    {
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
+
+        Comment::create([
+            'body' => request('body'),
+            'user_id' => Auth::user()->id,
+            'booru_id' => $id->id
+        ]);
+
+        return back()->with('success', 'Your comment has been posted.');
     }
 }

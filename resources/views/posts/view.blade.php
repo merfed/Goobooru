@@ -56,19 +56,39 @@
 <img src="{{ asset('uploads/'.$post->image) }}" alt="">
 @endif
 
-<div class="actions" style="margin: 16px 0;">
+<div class="actions mt-1 mb-3">
     <a href="#">Edit</a> | @if ($post->isFavorited()) <a href="{{ route('unfav', ['id' => $post->id]) }}">Remove from Favorites</a> @else <a href="{{ route('fav', ['id' => $post->id]) }}">Favorite</a> @endif | <a href="#">Flag</a>
 </div>
 
-<div class="container-sm comments" style="margin: 30px 0;">
-    <form>
+<div class="container-sm comments my-3">
+    <form action="{{ route('commentOnPost', ['id' => $post->id]) }}" method="POST">
+        @csrf
         <div class="d-block" style="margin-bottom: 16px;">
-            <textarea name="comment" id="" cols="30" rows="10" class="form-control input-block"></textarea>
+            <textarea name="body" id="" cols="30" rows="10" class="form-control input-block"></textarea>
         </div>
-        <button class="btn" type="submit">Comment</button>
+        <button class="btn btn-primary" type="submit">Comment</button>
     </form>
 
-    <h3 style="margin: 30px 0 20px 0;">Comments</h3>
+    <h3 class="mt-3 mb-2">Comments <span style="color: #aaa">({{ ($post->comments->count() > 0) ? $post->comments->count() : '' }})</span></h3>
+
+    @if ($post->comments->count() > 0)
+    @foreach ($post->comments as $comment)
+    <div class="post-comment d-flex">
+        <div class="post-comment-sidebar">
+            <a class="username" href="{{ route('profile', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
+            <div class="when">{{ $comment->created_at->diffForHumans() }}</div>
+
+            @if ($comment->user->avatar != null)
+            <img width="50" height="50" src="{{ asset(config('goobooru.avatar_upload_path') .'/'. $comment->user->avatar) }}" alt="">
+            @endif
+        </div>
+        <div class="post-comment-content flex-auto">
+            {!! $comment->body !!}
+        </div>
+    </div>
+    @endforeach
+    @endif
+
 </div>
 
 @endsection

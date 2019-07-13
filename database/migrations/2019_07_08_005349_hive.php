@@ -32,6 +32,17 @@ class Hive extends Migration
             $table->timestamps();
         });
 
+        Schema::create('comments', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('body');
+            $table->integer('user_id');
+            $table->integer('booru_id');
+            $table->boolean('as_admin')->default('0');
+            $table->boolean('as_mod')->default('0');
+            $table->boolean('deleted')->default('0');
+            $table->timestamps();
+        });
+
         // Types
         // 0 - General
         // 1 - Artist
@@ -120,6 +131,7 @@ class Hive extends Migration
     public function down()
     {
         Schema::dropIfExists('boorus');
+        Schema::dropIfExists('comments');
         Schema::dropIfExists('tags');
         Schema::dropIfExists('favs');
         Schema::dropIfExists('pools');

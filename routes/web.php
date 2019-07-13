@@ -36,6 +36,7 @@ Route::group(['prefix' => 'post', 'middleware' => ['web']], function() {
     Route::get('/{id}', 'Boorus@post')->name('post');
     Route::get('/{id}/fav', 'Boorus@fav')->name('fav');
     Route::get('/{id}/unfav', 'Boorus@unfav')->name('unfav');
+    Route::post('/{id}', 'Boorus@comment')->name('commentOnPost');
 });
 
 Route::group(['prefix' => 'pools', 'middleware' => ['web']], function() {

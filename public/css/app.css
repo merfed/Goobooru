@@ -7425,7 +7425,8 @@ pre {
   font-weight: 700;
 }
 
-.thread .forum-comment {
+.post-comment,
+.forum-comment {
   padding: 6px 8px;
   margin: 2px 0;
   background: #fef9fe;
@@ -7433,20 +7434,30 @@ pre {
   border-bottom: 1px solid #f9accf;
 }
 
-.thread .forum-comment:nth-child(2n) {
+.post-comment:nth-child(2n),
+.forum-comment:nth-child(2n) {
   background: #fef5fa;
 }
 
-.thread .forum-comment .forum-comment-sidebar {
+.post-comment .post-comment-sidebar,
+.post-comment .forum-comment-sidebar,
+.forum-comment .post-comment-sidebar,
+.forum-comment .forum-comment-sidebar {
   width: 150px;
   flex-shrink: 0;
 }
 
-.thread .forum-comment .forum-comment-sidebar .username {
+.post-comment .post-comment-sidebar .username,
+.post-comment .forum-comment-sidebar .username,
+.forum-comment .post-comment-sidebar .username,
+.forum-comment .forum-comment-sidebar .username {
   font-weight: bold;
 }
 
-.thread .forum-comment .forum-comment-sidebar .when {
+.post-comment .post-comment-sidebar .when,
+.post-comment .forum-comment-sidebar .when,
+.forum-comment .post-comment-sidebar .when,
+.forum-comment .forum-comment-sidebar .when {
   color: #888;
   font-size: 10px;
 }
