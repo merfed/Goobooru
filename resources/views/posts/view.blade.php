@@ -69,7 +69,7 @@
         <button class="btn btn-primary" type="submit">Comment</button>
     </form>
 
-    <h3 class="mt-3 mb-2">Comments <span style="color: #aaa">({{ ($post->comments->count() > 0) ? $post->comments->count() : '' }})</span></h3>
+    <h3 class="mt-3 mb-2">Comments <span style="color: #aaa">({{ ($post->comments->count() > 0) ? $post->comments->count() : '0' }})</span></h3>
 
     @if ($post->comments->count() > 0)
     @foreach ($post->comments as $comment)
