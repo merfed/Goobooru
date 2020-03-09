@@ -85,8 +85,8 @@ class Boorus extends Controller
         $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
         $ext = $request->file('file')->getClientOriginalExtension();
 
-        $original = $slug .'_original.'. $ext;
-        $thumbnail = $slug .'_thumb.'. $ext;
+        $original = $slug .'.'. $ext;
+        $thumbnail = 'thumb_' . $slug . '.' . $ext;
         $image->save($path.$original);
 
         $image->resize(800, null, function ($constraint) {
