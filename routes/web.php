@@ -19,7 +19,7 @@ Route::group(['prefix' => 'posts', 'middleware' => ['web']], function() {
     Route::get('/', 'Boorus@index')->name('posts');
     Route::get('/hot', 'Boorus@hot')->name('hotPosts');
     Route::get('/random', 'Boorus@random')->name('random');
-    // Route::get('/urls', 'Controller@urls')->name('urlPosts');
+    Route::get('/urls', 'Boorus@urls')->name('urlPosts');
     Route::get('/dcma', 'Boorus@dcma')->name('dcma');
     Route::get('/tos', 'Boorus@tos')->name('tos');
     // Route::get('/help', 'Boorus@help')->name('help');
@@ -37,6 +37,7 @@ Route::group(['prefix' => 'post', 'middleware' => ['web']], function() {
     Route::get('/{id}/fav', 'Boorus@fav')->name('fav');
     Route::get('/{id}/unfav', 'Boorus@unfav')->name('unfav');
     Route::post('/{id}', 'Boorus@comment')->name('commentOnPost');
+    Route::get('/{id}/lock', 'Boorus@changeLockStatus')->name('postChangeLock');
 });
 
 Route::group(['prefix' => 'pools', 'middleware' => ['web']], function() {

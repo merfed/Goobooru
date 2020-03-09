@@ -36,14 +36,19 @@
 
 <h4 class="mb-2">Options</h4>
 <ul style="list-style-type: none;" class="mb-6">
+    @if ($post->locked)
+    <li><a href="#" style="color: #f00;">Edit</a></li>
+    @else
     <li><a href="#">Edit</a></li>
+    @endif
+
     <li><a href="{{ asset('uploads/'.$post->image) }}">Original image</a></li>
     <li><a href="#">Delete</a></li>
     <li><a href="#">Flag for deletion</a></li>
     <li><a href="#">Add note</a></li>
     <li><a href="#">Add to favorites</a></li>
     <li><a href="{{ route('poolsAddPost', ['post' => $post->id]) }}">Add to pool</a></li>
-    <li><a href="#">Lock</a></li>
+    <li><a href="{{ route('postChangeLock', $post->id) }}">Lock</a></li>
 </ul>
 
 @endsection

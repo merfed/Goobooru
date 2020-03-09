@@ -164,6 +164,17 @@ class Boorus extends Controller
         }
     }
 
+    public function changeLockStatus(Booru $id)
+    {
+        if ($id->locked) {
+            $id->update(['locked' => 0]);
+            return back()->with('success', 'The image has been unlocked.');
+        } else {
+            $id->update(['locked' => 1]);
+            return back()->with('success', 'The image has been locked.');
+        }
+    }
+
     public function fav(Booru $id)
     {
         $check = Fav::where('image_id', $id->id)->where('user_id', Auth::user()->id)->first();
@@ -179,6 +190,7 @@ class Boorus extends Controller
 
         return back()->with('success', 'This post has been added to your favorites.');
     }
+
 
     public function unfav(Booru $id)
     {
