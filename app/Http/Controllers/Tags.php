@@ -71,18 +71,22 @@ class Tags extends Controller
         return (count(explode(',', $tags)) >= config('goobooru.min_tags'));
     }
 
-     public static function processMeta($tag, $type, $booru = null)
+     public static function processMeta($tags, $type, $booru = null)
     {
         $ignored = [];
-        $tag = trim($tag);
-        $check = Tag::where('name', $tag)->where('type', $type)->first();
+        $tags = explode(',', $tags);
 
-        if ($tag !== '') {
-            if ($check === null) {
-                $t = Tag::create([
-                    'name' => $tag,
-                    'type' => $type
-                ]);
+        foreach ($tags as $tag) {
+            $tag = trim($tag);
+            $check = Tag::where('name', $tag)->where('type', $type)->first();
+
+            if ($tag !== '') {
+                if ($check === null) {
+                    $t = Tag::create([
+                        'name' => $tag,
+                        'type' => $type
+                    ]);
+                }
 
                 if ($booru != null) {
                     Tagged::create([
