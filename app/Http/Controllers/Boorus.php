@@ -7,6 +7,7 @@ use App\Booru;
 use App\Tag;
 use App\Fav;
 use App\Comment;
+use Image;
 use Illuminate\Http\Request;
 
 class Boorus extends Controller
@@ -78,13 +79,30 @@ class Boorus extends Controller
             return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>'. config('goobooru.min_tags') .'</b>');
         }
 
-        $image = $request->file('file');
-        $name = str_random(32) .'.'. $image->getClientOriginalExtension();
+        $image = Image::make($request->file('file'));
+        $slug = str_random(32);
+        $path = public_path(config('goobooru.upload_path'));
+        $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
+        $ext = $request->file('file')->getClientOriginalExtension();
 
-        $image->move(public_path(config('goobooru.upload_path')), $name);
+        $original = $slug .'_original.'. $ext;
+        $thumbnail = $slug .'_thumb.'. $ext;
+        $image->save($path.$original);
+
+        $image->resize(800, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $image->save($thumbnail_path.$thumbnail);
+
+
+
+        // $name = str_random(32) .'.'. $image->getClientOriginalExtension();
+
+        // $image->move(public_path(config('goobooru.upload_path')), $name);
 
         $booru = Booru::create([
-            'image' => $name,
+            'image' => $original,
             'uploader_id' => Auth::user()->id,
             'source' => trim(request('source')),
             'title' => trim(request('title')),

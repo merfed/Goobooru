@@ -74,35 +74,38 @@ class Tags extends Controller
      public static function processMeta($tags, $type, $booru = null)
     {
         $ignored = [];
-        $tags = explode(',', $tags);
 
-        foreach ($tags as $tag) {
-            $tag = trim($tag);
-            $check = Tag::where('name', $tag)->where('type', $type)->first();
+        if ($tags != null) {
+            $tags = explode(',', $tags);
 
-            if ($tag !== '') {
-                if ($check === null) {
-                    $t = Tag::create([
-                        'name' => $tag,
-                        'type' => $type
-                    ]);
+            foreach ($tags as $tag) {
+                $tag = trim($tag);
+
+                if ($tag !== '' || $tag !== "" || empty($tag)) {
+                    $check = Tag::where('name', $tag)->where('type', $type)->first();
+                    if ($check === null) {
+                        $t = Tag::create([
+                            'name' => $tag,
+                            'type' => $type
+                        ]);
+
+                        if ($booru != null) {
+                            Tagged::create([
+                                'booru_id' => $booru->id,
+                                'tag_id' => $t->id
+                            ]);
+                        }
+                    } else {
+                        if ($booru != null) {
+                            Tagged::create([
+                                'booru_id' => $booru->id,
+                                'tag_id' => $check->id
+                            ]);
+                        }
+
+                        $ignored[] = $tag;
+                    }
                 }
-
-                if ($booru != null) {
-                    Tagged::create([
-                        'booru_id' => $booru->id,
-                        'tag_id' => $t->id
-                    ]);
-                }
-            } else {
-                if ($booru != null) {
-                    Tagged::create([
-                        'booru_id' => $booru->id,
-                        'tag_id' => $check->id
-                    ]);
-                }
-
-                $ignored[] = $tag;
             }
         }
 
