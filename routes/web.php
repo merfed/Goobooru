@@ -39,6 +39,7 @@ Route::group(['prefix' => 'post', 'middleware' => ['web']], function() {
     Route::get('/{id}/lock', 'Boorus@changeLockStatus')->name('postChangeLock');
     Route::get('/{id}/flag', 'Boorus@changeFlagStatus')->name('postFlag');
     Route::get('/{id}/delete', 'Boorus@deletePost')->name('deletePost');
+    Route::get('/{id}/edit', 'Boorus@edit')->name('editPost');
 });
 
 Route::group(['prefix' => 'pools', 'middleware' => ['web']], function() {

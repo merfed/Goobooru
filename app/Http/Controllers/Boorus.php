@@ -131,6 +131,13 @@ class Boorus extends Controller
         return redirect()->back()->with('success', 'Your image has been uploaded successfully.');
     }
 
+    public function edit(Booru $id)
+    {
+        return view('post.edit', [
+            'post' => $id
+        ]);
+    }
+
     public function queue()
     {
         return view('posts.queue', ['posts' => Booru::doesntHave('tags')->paginate(20)]);

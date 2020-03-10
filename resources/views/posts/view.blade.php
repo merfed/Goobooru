@@ -40,7 +40,7 @@
     @if ($post->locked)
     <li><a href="#" style="color: #f00;">Edit</a></li>
     @else
-    <li><a href="#">Edit</a></li>
+    <li><a href="{{ route('editPost', $post) }}">Edit</a></li>
     @endif
 
     <li><a href="{{ asset('uploads/'.$post->image) }}">Original image</a></li>
@@ -63,7 +63,7 @@
 @endif
 
 <div class="actions mt-1 mb-3">
-    <a href="#">Edit</a> | <a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a> | <a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag' : 'Flag' }}</a>
+    <a href="{{ route('editPost', $post) }}">Edit</a> | <a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a> | <a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag' : 'Flag' }}</a>
 </div>
 
 <div class="container-sm comments my-3">
