@@ -290,6 +290,17 @@ class Boorus extends Controller
         return back()->with('success', 'Your comment has been posted.');
     }
 
+    public function deleteComment(Booru $id, Comment $comment)
+    {
+        if ($comment->user_id == Auth::user()->id) {
+            $comment->delete();
+
+            return back()->with('success', 'The comment has been deleted!');
+        }
+
+        return back()->with('error', 'This is not your comment! You cannot delete this!');
+    }
+
     public function vote(Booru $id, $type)
     {
         $check = Score::where('booru_id', $id->id)->where('user_id', Auth::user()->id)->first();
