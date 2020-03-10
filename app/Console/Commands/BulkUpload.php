@@ -60,16 +60,7 @@ class BulkUpload extends Command
             $original->save($path . $name);
             $thumbnail->save($thumbnail_path . $thumbnail_name);
 
-            // copy(public_path('import/'. $file), public_path('uploads/'. $name));
-            // rename(public_path('import/'. $file), public_path('thumbnails/'. $thumbnail_name));
-
             unlink(public_path('import/'. $file));
-
-
-            // $ext = pathinfo(public_path('uploads/'. $file), PATHINFO_EXTENSION);
-            // $name = str_random(32) .'.'. $ext;
-
-            // rename(public_path('import/'. $file), public_path('uploads/'. $name));
 
             Booru::create([
                 'image' => $name,
