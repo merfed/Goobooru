@@ -101,6 +101,6 @@ class Booru extends Model
 
     public function getSource()
     {
-        return ($this->source->source == null) ? 'Unknown' : $this->source->source;
+        return ($this->source == null) ? 'Unknown' : $this->source->source;
     }
 }
