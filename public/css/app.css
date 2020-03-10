@@ -7476,3 +7476,12 @@ pre {
   margin-right: 16px;
 }
 
+.warning {
+  border: 1px solid #d1d5da;
+  border-bottom: 2px solid #d1d5da;
+  border-radius: 3px;
+  background: #fffbdd;
+  color: #735c0f;
+  padding: 16px;
+}
+
