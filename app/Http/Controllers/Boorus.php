@@ -6,9 +6,9 @@ use App\Booru;
 use App\Comment;
 use App\Fav;
 use App\Flagged;
+use App\Score;
 use App\Source;
 use App\Tag;
-use App\Score;
 use App\Tagged;
 use Auth;
 use File;
@@ -83,52 +83,7 @@ class Boorus extends Controller
             'rating' => 'required',
         ]);
 
-        // if (!$this->checkImage()) {
-        //     return back()->with('error', 'The image you attempted to upload exists already in this booru, and can be found <a href="#">here</a>.');
-        // }
-
-        if (!Tags::hasEnoughTags(request('tags'))) {
-            return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>' . config('goobooru.min_tags') . '</b>');
-        }
-
-        $image          = Image::make($request->file('file'));
-        $slug           = str_random(32);
-        $path           = public_path(config('goobooru.upload_path'));
-        $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
-        $ext            = $request->file('file')->getClientOriginalExtension();
-
-        $original  = $slug . '.' . $ext;
-        $width     = $image->width();
-        $height    = $image->height();
-        $thumbnail = 'thumb_' . $slug . '.' . $ext;
-        $image->save($path . $original);
-
-        $image->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-
-        $image->save($thumbnail_path . $thumbnail);
-
-        $booru = Booru::create([
-            'image'       => $original,
-            'uploader_id' => Auth::user()->id,
-            'title'       => trim(request('title')),
-            'rating'      => request('rating'),
-            'width'       => $width,
-            'height'      => $height,
-        ]);
-
-        if ($request->source != null) {
-            Source::create([
-                'booru_id' => $booru->id,
-                'source'   => trim(request('source')),
-            ]);
-        }
-
-        Tags::processTags(request('tags'), $booru);
-
-        $this->processMeta($request, $booru);
+        Booru::upload($request);
 
         return redirect()->back()->with('success', 'Your image has been uploaded successfully.');
     }
@@ -170,22 +125,6 @@ class Boorus extends Controller
         // NO HASH FOUND
         // Create hash
         // return TRUE
-    }
-
-    public function processMeta($request, $booru)
-    {
-        $metas = [
-            1 => 'artist',
-            2 => 'character',
-            3 => 'copyright',
-            4 => 'year',
-        ];
-
-        foreach ($metas as $id => $type) {
-            if ($request->has($type)) {
-                Tags::processMeta(request($type), $id, $booru);
-            }
-        }
     }
 
     public function changeLockStatus(Booru $id)
@@ -310,16 +249,16 @@ class Boorus extends Controller
             if ($type == 'up') {
                 Score::create([
                     'booru_id' => $id->id,
-                    'user_id' => Auth::user()->id,
-                    'neg' => 0,
-                    'pos' => 1,
+                    'user_id'  => Auth::user()->id,
+                    'neg'      => 0,
+                    'pos'      => 1,
                 ]);
             } elseif ($type == 'down') {
                 Score::create([
                     'booru_id' => $id->id,
-                    'user_id' => Auth::user()->id,
-                    'pos' => 0,
-                    'neg' => 1,
+                    'user_id'  => Auth::user()->id,
+                    'pos'      => 0,
+                    'neg'      => 1,
                 ]);
             } else {
                 return back()->with('error', 'Sorry, don\'t know how to handle this vote type.');

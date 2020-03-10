@@ -3,6 +3,8 @@
 namespace App;
 
 use Auth;
+use Image;
+use App\Tag;
 use Illuminate\Database\Eloquent\Model;
 
 class Booru extends Model
@@ -130,5 +132,83 @@ class Booru extends Model
             'pos'    => $pos,
             'neg'    => $neg,
         ];
+    }
+
+    public static function upload($data, $checkTags = true)
+    {
+        // if (!$this->checkImage()) {
+        //     return back()->with('error', 'The image you attempted to upload exists already in this booru, and can be found <a href="#">here</a>.');
+        // }
+
+        if ($checkTags) {
+            if (! Tag::hasEnoughTags($data->tags)) {
+                return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>' . config('goobooru.min_tags') . '</b>');
+            }
+        }
+
+        $slug = str_random(32);
+        $ext = $data->file->getClientOriginalExtension();
+        $path = public_path(config('goobooru.upload_path'));
+        $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
+        $original = Image::make($data->file);
+        $thumbnail = Image::make($data->file);
+        $thumbnail->resize(800, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
+        $upload = (object) [
+            'original' => (object) [
+                'image' => $original,
+                'name' => $slug .'.'. $ext,
+                'width' => $original->width(),
+                'height' => $original->height(),
+                'path' => $path . $slug .'.'. $ext,
+            ],
+            'thumbnail' => (object) [
+                'image' => $thumbnail,
+                'name' => 'thumb_'. $slug .'.'. $ext,
+                'path' => $thumbnail_path . 'thumb_'. $slug .'.'. $ext,
+            ],
+            'title' => $data->title,
+            'rating' => $data->rating,
+            'source' => $data->source
+        ];
+
+        $original->save($upload->original->path);
+        $thumbnail->save($upload->thumbnail->path);
+
+        $booru = Booru::create([
+            'image' => $upload->original->name,
+            'uploader_id' => Auth::user()->id,
+            'title' => $upload->title,
+            'rating' => $upload->rating,
+            'width' => $upload->original->width,
+            'height' => $upload->original->height,
+        ]);
+
+        if ($upload->source != null) {
+            Source::create([
+                'booru_id' => $booru->id,
+                'source' => trim($upload->source)
+            ]);
+        }
+
+        if ($checkTags) {
+            Tag::processTags($data->tags, $booru);
+
+            $metas = [
+                1 => 'artist',
+                2 => 'character',
+                3 => 'copyright',
+                4 => 'year',
+            ];
+
+            foreach ($metas as $id => $type) {
+                if ($data->has($type)) {
+                    Tag::processMeta(request($type), $id, $booru);
+                }
+            }
+        }
     }
 }
