@@ -83,17 +83,23 @@
 
     @if ($post->comments->count() > 0)
     @foreach ($post->comments as $comment)
-    <div class="post-comment d-flex">
-        <div class="post-comment-sidebar">
-            <a class="username" href="{{ route('profile', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
-            <div class="when">{{ $comment->created_at->diffForHumans() }}</div>
-
-            @if ($comment->user->avatar != null)
-            <img width="50" height="50" src="{{ asset(config('goobooru.avatar_upload_path') .'/'. $comment->user->avatar) }}" alt="">
-            @endif
+    <div class="post-comment">
+        <div class="d-flex flex-row-reverse">
+            <a href="{{ route('deleteComment', [$post, $comment]) }}" style="font-size: 10px; color: #d1d4d8;">Delete</a>
         </div>
-        <div class="post-comment-content flex-auto">
-            {!! $comment->body !!}
+        <div class="d-flex">
+            <div class="post-comment-sidebar">
+                <a class="username" href="{{ route('profile', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
+                <div class="when">{{ $comment->created_at->diffForHumans() }}</div>
+
+                @if ($comment->user->avatar != null)
+                <img width="50" height="50" src="{{ asset(config('goobooru.avatar_upload_path') .'/'. $comment->user->avatar) }}" alt="">
+                @endif
+            </div>
+
+            <div class="post-comment-content flex-auto">
+                {!! $comment->body !!}
+            </div>
         </div>
     </div>
     @endforeach
