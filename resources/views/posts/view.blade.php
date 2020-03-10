@@ -48,7 +48,6 @@
     <li><a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag for deletion' : 'Flag for deletion' }}</a></li>
     <li><a href="#">Add note</a></li>
     <li><a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a></li>
-    <li><a href="#">Add to favorites</a></li>
     <li><a href="{{ route('poolsAddPost', ['post' => $post->id]) }}">Add to pool</a></li>
     <li><a href="{{ route('postChangeLock', $post) }}">Lock</a></li>
 </ul>
