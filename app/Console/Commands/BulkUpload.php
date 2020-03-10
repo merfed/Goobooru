@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Image;
 use App\Booru;
 use Illuminate\Console\Command;
 
@@ -42,10 +43,33 @@ class BulkUpload extends Command
         $files = array_map('basename', $files);
 
         foreach ($files as $file) {
-            $ext = pathinfo(public_path('uploads/'. $file), PATHINFO_EXTENSION);
-            $name = str_random(32) .'.'. $ext;
+            $slug = str_random(32);
+            $ext = pathinfo(public_path('import/'. $file), PATHINFO_EXTENSION);
+            $path = public_path(config('goobooru.upload_path'));
+            $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
+            $original = Image::make(public_path('import/'. $file));
+            $thumbnail = Image::make(public_path('import/'. $file));
+            $thumbnail->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
 
-            rename(public_path('import/'. $file), public_path('uploads/'. $name));
+            $name = $slug .'.'. $ext;
+            $thumbnail_name = 'thumb_'. $slug .'.'. $ext;
+
+            $original->save($path . $name);
+            $thumbnail->save($thumbnail_path . $thumbnail_name);
+
+            // copy(public_path('import/'. $file), public_path('uploads/'. $name));
+            // rename(public_path('import/'. $file), public_path('thumbnails/'. $thumbnail_name));
+
+            unlink(public_path('import/'. $file));
+
+
+            // $ext = pathinfo(public_path('uploads/'. $file), PATHINFO_EXTENSION);
+            // $name = str_random(32) .'.'. $ext;
+
+            // rename(public_path('import/'. $file), public_path('uploads/'. $name));
 
             Booru::create([
                 'image' => $name,
