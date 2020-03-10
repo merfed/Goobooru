@@ -186,6 +186,17 @@ class Boorus extends Controller
         }
     }
 
+    public function changeFlagStatus(Booru $id)
+    {
+        if ($id->isFlagged()) {
+            $id->unFlag();
+            return back()->with('success', 'You have retracted your flag for deletion.');
+        } else {
+            $id->flag();
+            return back()->with('success', 'You have flagged this post for deletion.');
+        }
+    }
+
     public function fav(Booru $id)
     {
         $check = Fav::where('image_id', $id->id)->where('user_id', Auth::user()->id)->first();

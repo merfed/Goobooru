@@ -48,6 +48,11 @@ class Booru extends Model
         return $this->hasOne('App\Source', 'booru_id');
     }
 
+    public function flagged()
+    {
+        return $this->hasMany('App\Flag', 'booru_id');
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Comment', 'booru_id');
@@ -74,5 +79,23 @@ class Booru extends Model
         $check = \App\Fav::where('image_id', $this->id)->where('user_id', Auth::user()->id)->first();
 
         return ($check != null) ? true : false;
+    }
+
+    public function isFlagged()
+    {
+        return ($this->flagged->where('creator_id', Auth::user()->id)->count()) ? true : false;
+    }
+
+    public function unFlag()
+    {
+        return $this->flagged()->delete();
+    }
+
+    public function flag()
+    {
+        Flag::create([
+            'booru_id' => $this->id,
+            'creator_id' => Auth::user()->id
+        ]);
     }
 }
