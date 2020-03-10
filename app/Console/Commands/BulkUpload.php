@@ -73,7 +73,7 @@ class BulkUpload extends Command
 
             Booru::create([
                 'image' => $name,
-                'uploader_id' => 0
+                'uploader_id' => 1
             ]);
         }
 
