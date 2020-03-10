@@ -60,6 +60,10 @@ Route::group(['prefix' => 'pools', 'middleware' => ['web', 'auth']], function() 
     Route::post('/add/tags', 'Pools@storeTags')->name('poolsPostBulkAddTags');
 });
 
+Route::group(['prefix' => 'pool', 'middleware' => ['web']], function() {
+    Route::get('/{id}', 'Pools@pool')->name('pool');
+});
+
 Route::group(['prefix' => 'tags', 'middleware' => ['web']], function() {
     Route::get('/', 'Tags@index')->name('tags');
 });

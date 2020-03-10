@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Pool;
 use App\Pooled;
+use App\Booru;
 use Illuminate\Http\Request;
 
 class Pools extends Controller
@@ -159,5 +160,16 @@ class Pools extends Controller
         (! empty($error)) ? $data['error'] = 'The following tags do not exist and have been ignored: '. implode(',', array_unique($error)) : '';
 
         return back()->with($data);
+    }
+
+    public function pool(Pool $id)
+    {
+        if ($id == null)
+            return back()->with('error', 'This pool doesn\'t exist.');
+
+        return view('pools.view', [
+            'pool' => $id,
+            'posts' => $id->posts()->paginate(config('goobooru.paginate'))
+        ]);
     }
 }

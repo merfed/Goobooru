@@ -17,7 +17,7 @@
         <span style="border-radius: 3px; font-size: 12px; color: #fff; background: #f00; padding: 2px 4px;">Private</span>
         @endif
 
-        <b><a href="#">{{ $pool->name }}</a> <span style="color: #ccc;">({{ $pool->posts_count }})</span></b>
+        <b><a href="{{ route('pool', $pool) }}">{{ $pool->name }}</a> <span style="color: #ccc;">({{ ($pool->posts->count() > 0) ? $pool->posts->count() : 0 }})</span></b>
     </div>
 
     @if ($pool->description != null)
@@ -26,8 +26,13 @@
 </div>
 @endforeach
 
+{{ $pools->links() }}
+
 @else
-NO POOLS
+<div class="warning">
+    <p><b>There are no pools!</b></p>
+    <div class="d-block">Why not <a href="{{ route('poolsCreate') }}">create</a> a pool to group images that don't have similar tags?</div>
+</div>
 @endif
 
 @endsection
