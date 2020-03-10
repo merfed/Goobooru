@@ -5,7 +5,7 @@
         <a href="{{ route('hotPosts') }}" class="{{ request()->is('posts/hot') ? 'active' : '' }}">Hot</a>
         <a href="{{ route('random') }}" class="{{ request()->is('posts/random') ? 'active' : '' }}">Random</a>
         <a href="#">Saved Searches</a>
-        <a href="#">URLs</a>
+        <a href="{{ route('urlPosts') }}" class="{{ request()->is('posts/urls') ? 'active' : '' }}">URLs</a>
         <a href="{{ route('tos') }}" class="{{ request()->is('posts/tos') ? 'active' : '' }}">TOS</a>
         <a href="{{ route('dcma') }}" class="{{ request()->is('posts/dcma') ? 'active' : '' }}">DCMA</a>
         <a href="#">Help</a>

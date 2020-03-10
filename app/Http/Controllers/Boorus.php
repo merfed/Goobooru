@@ -48,6 +48,13 @@ class Boorus extends Controller
         ]);
     }
 
+    public function urls()
+    {
+        return view('posts.urls', [
+            'posts' => Source::paginate(config('goobooru.paginate'))
+        ]);
+    }
+
     public function tos()
     {
         return view('posts.tos');
