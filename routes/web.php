@@ -34,8 +34,7 @@ Route::group(['prefix' => 'posts', 'middleware' => ['web', 'auth']], function() 
 
 Route::group(['prefix' => 'post', 'middleware' => ['web']], function() {
     Route::get('/{id}', 'Boorus@post')->name('post');
-    Route::get('/{id}/fav', 'Boorus@fav')->name('fav');
-    Route::get('/{id}/unfav', 'Boorus@unfav')->name('unfav');
+    Route::get('/{id}/fav', 'Boorus@changeFavStatus')->name('postFav');
     Route::post('/{id}', 'Boorus@comment')->name('commentOnPost');
     Route::get('/{id}/lock', 'Boorus@changeLockStatus')->name('postChangeLock');
     Route::get('/{id}/flag', 'Boorus@changeFlagStatus')->name('postFlag');

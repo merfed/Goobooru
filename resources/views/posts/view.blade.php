@@ -47,14 +47,10 @@
     <li><a href="#">Delete</a></li>
     <li><a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag for deletion' : 'Flag for deletion' }}</a></li>
     <li><a href="#">Add note</a></li>
-    @if ($post->isFavorited())
-    <li><a href="{{ route('unfav', ['id' => $post->id]) }}">Remove from Favorites</a></li>
-    @else
-    <a href="{{ route('fav', ['id' => $post->id]) }}">Favorite</a>
-    @endif
+    <li><a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a></li>
     <li><a href="#">Add to favorites</a></li>
     <li><a href="{{ route('poolsAddPost', ['post' => $post->id]) }}">Add to pool</a></li>
-    <li><a href="{{ route('postChangeLock', $post->id) }}">Lock</a></li>
+    <li><a href="{{ route('postChangeLock', $post) }}">Lock</a></li>
 </ul>
 
 @endsection
@@ -68,7 +64,7 @@
 @endif
 
 <div class="actions mt-1 mb-3">
-    <a href="#">Edit</a> | @if ($post->isFavorited()) <a href="{{ route('unfav', ['id' => $post->id]) }}">Remove from Favorites</a> @else <a href="{{ route('fav', ['id' => $post->id]) }}">Favorite</a> @endif | <a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag' : 'Flag' }}</a>
+    <a href="#">Edit</a> | <a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a> | <a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag' : 'Flag' }}</a>
 </div>
 
 <div class="container-sm comments my-3">
