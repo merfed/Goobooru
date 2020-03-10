@@ -68,9 +68,11 @@
     @endif
 </div>
 
+@if ($post->pools->count())
 <div class="my-4">
     <strong>Belongs to </strong> @foreach ($post->pools as $pool) <a href="#">{{ $pool->name }}</a>@if(!$loop->last),@endif @endforeach
 </div>
+@endif
 
 <div class="container-sm comments my-3">
     @if (Auth::user())
