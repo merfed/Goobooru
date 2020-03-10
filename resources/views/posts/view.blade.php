@@ -37,19 +37,19 @@
 
 <h4 class="mb-2">Options</h4>
 <ul style="list-style-type: none;" class="mb-6">
+    <li><a href="{{ asset('uploads/'.$post->image) }}">Original image</a></li>
+    @if (Auth::user())
     @if ($post->locked)
     <li><a href="#" style="color: #f00;">Edit</a></li>
     @else
     <li><a href="{{ route('editPost', $post) }}">Edit</a></li>
     @endif
-
-    <li><a href="{{ asset('uploads/'.$post->image) }}">Original image</a></li>
     <li><a href="{{ route('deletePost', $post) }}">Delete</a></li>
     <li><a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag for deletion' : 'Flag for deletion' }}</a></li>
-    <li><a href="#">Add note</a></li>
     <li><a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a></li>
     <li><a href="{{ route('poolsAddPost', ['post' => $post->id]) }}">Add to pool</a></li>
     <li><a href="{{ route('postChangeLock', $post) }}">Lock</a></li>
+    @endif
 </ul>
 
 @endsection
@@ -63,10 +63,13 @@
 @endif
 
 <div class="actions mt-1 mb-3">
+    @if (Auth::user())
     <a href="{{ route('editPost', $post) }}">Edit</a> | <a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a> | <a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag' : 'Flag' }}</a>
+    @endif
 </div>
 
 <div class="container-sm comments my-3">
+    @if (Auth::user())
     <form action="{{ route('commentOnPost', ['id' => $post->id]) }}" method="POST">
         @csrf
         <div class="d-block" style="margin-bottom: 16px;">
@@ -74,6 +77,7 @@
         </div>
         <button class="btn btn-primary" type="submit">Comment</button>
     </form>
+    @endif
 
     <h3 class="mt-3 mb-2">Comments <span style="color: #aaa">({{ ($post->comments->count() > 0) ? $post->comments->count() : '0' }})</span></h3>
 
