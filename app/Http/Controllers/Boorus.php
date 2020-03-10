@@ -6,8 +6,10 @@ use Auth;
 use App\Booru;
 use App\Tag;
 use App\Fav;
+use App\Tagged;
 use App\Comment;
 use App\Source;
+use File;
 use Image;
 use Illuminate\Http\Request;
 
@@ -212,6 +214,27 @@ class Boorus extends Controller
 
             return back()->with('success', 'This post has been added to your favorites.');
         }
+    }
+
+    public function deletePost(Booru $id)
+    {
+        $path = public_path(config('goobooru.upload_path'));
+        $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
+
+        $id->comments()->delete();
+        $id->source()->delete();
+        $id->flagged()->delete();
+
+        // $id->pools()->delete();
+
+        Tagged::where('booru_id', $id->id)->delete();
+        Fav::where('image_id', $id->id)->delete();
+
+        File::delete([$path.$id->image, $thumbnail_path.'thumb_'.$id->image]);
+
+        $id->delete();
+
+        return redirect()->route('posts')->with('success', 'The post has been deleted.');
     }
 
     public function comment(Booru $id, Request $request)

@@ -44,7 +44,7 @@
     @endif
 
     <li><a href="{{ asset('uploads/'.$post->image) }}">Original image</a></li>
-    <li><a href="#">Delete</a></li>
+    <li><a href="{{ route('deletePost', $post) }}">Delete</a></li>
     <li><a href="{{ route('postFlag', ['id' => $post]) }}">{{ ($post->isFlagged()) ? 'Unflag for deletion' : 'Flag for deletion' }}</a></li>
     <li><a href="#">Add note</a></li>
     <li><a href="{{ route('postFav', $post) }}">{{ ($post->isFavorited()) ? 'Remove from Favorites' : 'Favorite' }}</a></li>
