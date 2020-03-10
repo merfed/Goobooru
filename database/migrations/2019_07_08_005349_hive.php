@@ -23,7 +23,6 @@ class Hive extends Migration
             $table->string('title')->nullable();
             $table->integer('uploader_id');
             $table->integer('rating')->default('1');
-            $table->integer('score')->default('0');
             $table->boolean('locked')->nullable();
             $table->integer('width')->nullable();
             $table->integer('height')->nullable();
@@ -48,6 +47,15 @@ class Hive extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('booru_id');
             $table->string('source')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('boorus_scores', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('booru_id');
+            $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('pos')->default('0');
+            $table->bigInteger('neg')->default('0');
             $table->timestamps();
         });
 
@@ -158,6 +166,7 @@ class Hive extends Migration
         Schema::dropIfExists('boorus_pools');
         Schema::dropIfExists('boorus_sources');
         Schema::dropIfExists('boorus_flags');
+        Schema::dropIfExists('boorus_scores');
         Schema::dropIfExists('hashes');
         Schema::dropIfExists('forum_categories');
         Schema::dropIfExists('forum_threads');

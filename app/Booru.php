@@ -44,7 +44,8 @@ class Booru extends Model
         return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 4)->withCount('posts');
     }
 
-    public function source() {
+    public function source()
+    {
         return $this->hasOne('App\Source', 'booru_id');
     }
 
@@ -63,7 +64,7 @@ class Booru extends Model
         $ratings = [
             1 => 'Safe',
             2 => 'Questionable',
-            3 => 'Explicit'
+            3 => 'Explicit',
         ];
 
         return ($lowercase) ? strtolower($ratings[$this->rating]) : $ratings[$this->rating];
@@ -71,7 +72,7 @@ class Booru extends Model
 
     public function getFileType()
     {
-        return pathinfo(asset('uploads/'. $this->image), PATHINFO_EXTENSION);
+        return pathinfo(asset('uploads/' . $this->image), PATHINFO_EXTENSION);
     }
 
     public function isFavorited()
@@ -94,13 +95,35 @@ class Booru extends Model
     public function flag()
     {
         Flag::create([
-            'booru_id' => $this->id,
-            'creator_id' => Auth::user()->id
+            'booru_id'   => $this->id,
+            'creator_id' => Auth::user()->id,
         ]);
     }
 
     public function getSource()
     {
         return ($this->source == null) ? 'Unknown' : $this->source->source;
+    }
+
+    public function posScore()
+    {
+        return $this->hasMany('App\Score', 'booru_id')->sum('pos');
+    }
+
+    public function negScore()
+    {
+        return $this->hasMany('App\Score', 'booru_id')->sum('neg');
+    }
+
+    public function getScore()
+    {
+        $pos = ($this->posScore() != null) ? $this->posScore() : 0;
+        $neg = ($this->negScore() != null) ? $this->negScore() : 0;
+
+        return (object) [
+            'simple' => $pos - $neg,
+            'pos'    => $pos,
+            'neg'    => $neg,
+        ];
     }
 }

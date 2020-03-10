@@ -32,7 +32,7 @@
     <li><b>Size:</b> {{ $post->width }}x{{ $post->height }}</li>
     <li><b>Source:</b> {{ $post->getSource() }}</li>
     <li><b>Rating:</b> <span class="rating-{{ $post->getRating(true) }}">{{ $post->getRating() }}</span></li>
-    <li><b>Score:</b> {{ $post->score }} <a href="#">&#x1F839;</a> <a href="#">&#x1F83B;</a></li>
+    <li><b>Score:</b> <abbr title="+{{ $post->getScore()->pos }}/-{{ $post->getScore()->neg }}">{{ $post->getScore()->simple }}</abbr> <a href="{{ route('votePost', [$post, 'up']) }}">&#x1F839;</a> <a href="{{ route('votePost', [$post, 'down']) }}">&#x1F83B;</a></li>
 </ul>
 
 <h4 class="mb-2">Options</h4>

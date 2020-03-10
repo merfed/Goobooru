@@ -43,6 +43,7 @@ Route::group(['prefix' => 'post', 'middleware' => ['web']], function() {
     Route::get('/{id}/flag', 'Boorus@changeFlagStatus')->name('postFlag');
     Route::get('/{id}/delete', 'Boorus@deletePost')->name('deletePost');
     Route::get('/{id}/edit', 'Boorus@edit')->name('editPost');
+    Route::get('/{id}/vote/{type}', 'Boorus@vote')->name('votePost');
 });
 
 Route::group(['prefix' => 'pools', 'middleware' => ['web']], function() {

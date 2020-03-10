@@ -8,6 +8,7 @@ use App\Fav;
 use App\Flagged;
 use App\Source;
 use App\Tag;
+use App\Score;
 use App\Tagged;
 use Auth;
 use File;
@@ -287,6 +288,74 @@ class Boorus extends Controller
         ]);
 
         return back()->with('success', 'Your comment has been posted.');
+    }
+
+    public function vote(Booru $id, $type)
+    {
+        $check = Score::where('booru_id', $id->id)->where('user_id', Auth::user()->id)->first();
+
+        // Never voted
+        if ($check == null) {
+            if ($type == 'up') {
+                Score::create([
+                    'booru_id' => $id->id,
+                    'user_id' => Auth::user()->id,
+                    'neg' => 0,
+                    'pos' => 1,
+                ]);
+            } elseif ($type == 'down') {
+                Score::create([
+                    'booru_id' => $id->id,
+                    'user_id' => Auth::user()->id,
+                    'pos' => 0,
+                    'neg' => 1,
+                ]);
+            } else {
+                return back()->with('error', 'Sorry, don\'t know how to handle this vote type.');
+            }
+        } else {
+            if ($type == 'up') {
+                if ($check->pos > 0) {
+                    $check->decrement('pos', 1);
+                    return back()->with('success', 'Your upvote has been removed.');
+                } elseif ($check->neg > 0) {
+                    $check->decrement('neg', 1);
+                    $check->increment('pos', 1);
+                    return back()->with('success', 'Your downvote has been removed and upvote has been cast.');
+                } else {
+                    $check->increment('pos', 1);
+                    return back()->with('success', 'Your vote has been cast!');
+                }
+            }
+
+            if ($type == 'down') {
+                if ($check->neg > 0) {
+                    $check->decrement('neg', 1);
+                    return back()->with('success', 'Your downvote has been removed.');
+                } elseif ($check->pos > 0) {
+                    $check->decrement('pos', 1);
+                    $check->increment('neg', 1);
+                    return back()->with('success', 'Your upvote has been removed and upvote has been cast.');
+                } else {
+                    $check->increment('neg', 1);
+                    return back()->with('success', 'Your vote has been cast!');
+                }
+            }
+
+            if ($type != 'up' || $type != 'down') {
+                return back()->with('error', 'Sorry, don\'t know how to handle this vote type.');
+            }
+
+            // if ($type == 'up') {
+            //     $check->increment('pos', 1);
+            // } elseif ($type == 'down') {
+            //     $check->increment('neg', 1);
+            // } else {
+            //     return back()->with('error', 'Sorry, don\'t know how to handle this vote type.');
+            // }
+        }
+
+        return back()->with('success', 'Your vote has been cast!');
     }
 
 }
