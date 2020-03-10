@@ -59,6 +59,11 @@ class Booru extends Model
         return $this->hasMany('App\Comment', 'booru_id');
     }
 
+    public function pools()
+    {
+        return $this->belongsToMany('App\Pool', 'boorus_pools', 'booru_id', 'pool_id');
+    }
+
     public function getRating($lowercase = false)
     {
         $ratings = [

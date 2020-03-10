@@ -68,6 +68,10 @@
     @endif
 </div>
 
+<div class="my-4">
+    <strong>Belongs to </strong> @foreach ($post->pools as $pool) <a href="#">{{ $pool->name }}</a>@if(!$loop->last),@endif @endforeach
+</div>
+
 <div class="container-sm comments my-3">
     @if (Auth::user())
     <form action="{{ route('commentOnPost', ['id' => $post->id]) }}" method="POST">
