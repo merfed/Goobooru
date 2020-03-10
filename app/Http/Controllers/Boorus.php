@@ -53,7 +53,7 @@ class Boorus extends Controller
     public function urls()
     {
         return view('posts.urls', [
-            'posts' => Source::paginate(config('goobooru.paginate'))
+            'urls' => Source::paginate(config('goobooru.paginate'))
         ]);
     }
 
@@ -117,10 +117,12 @@ class Boorus extends Controller
             'height' => $height
         ]);
 
-        Source::create([
-            'booru_id' => $booru->id,
-            'source' => trim(request('source')),
-        ]);
+        if ($request->source != null) {
+            Source::create([
+                'booru_id' => $booru->id,
+                'source' => trim(request('source')),
+            ]);
+        }
 
         Tags::processTags(request('tags'), $booru);
 

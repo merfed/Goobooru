@@ -98,4 +98,9 @@ class Booru extends Model
             'creator_id' => Auth::user()->id
         ]);
     }
+
+    public function getSource()
+    {
+        return ($this->source->source == null) ? 'Unknown' : $this->source->source;
+    }
 }
