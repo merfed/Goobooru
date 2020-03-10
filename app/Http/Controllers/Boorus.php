@@ -7,6 +7,7 @@ use App\Booru;
 use App\Tag;
 use App\Fav;
 use App\Comment;
+use App\Source;
 use Image;
 use Illuminate\Http\Request;
 
@@ -86,6 +87,8 @@ class Boorus extends Controller
         $ext = $request->file('file')->getClientOriginalExtension();
 
         $original = $slug .'.'. $ext;
+        $width = $image->width();
+        $height = $image->height();
         $thumbnail = 'thumb_' . $slug . '.' . $ext;
         $image->save($path.$original);
 
@@ -93,20 +96,21 @@ class Boorus extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         });
+
         $image->save($thumbnail_path.$thumbnail);
-
-
-
-        // $name = str_random(32) .'.'. $image->getClientOriginalExtension();
-
-        // $image->move(public_path(config('goobooru.upload_path')), $name);
 
         $booru = Booru::create([
             'image' => $original,
             'uploader_id' => Auth::user()->id,
-            'source' => trim(request('source')),
             'title' => trim(request('title')),
             'rating' => request('rating'),
+            'width' => $width,
+            'height' => $height
+        ]);
+
+        Source::create([
+            'booru_id' => $booru->id,
+            'source' => trim(request('source')),
         ]);
 
         Tags::processTags(request('tags'), $booru);

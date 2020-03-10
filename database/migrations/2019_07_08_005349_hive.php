@@ -21,14 +21,33 @@ class Hive extends Migration
             $table->bigIncrements('id');
             $table->string('image')->unique();
             $table->string('title')->nullable();
-            $table->string('source')->nullable();
             $table->integer('uploader_id');
             $table->integer('rating')->default('1');
             $table->integer('score')->default('0');
             $table->boolean('locked')->nullable();
+            $table->integer('width')->nullable();
+            $table->integer('height')->nullable();
             $table->boolean('flagged_for_delete')->nullable();
             $table->integer('flagged_for_delete_votes')->default('0');
             $table->integer('views')->default('0');
+            $table->timestamps();
+        });
+
+        Schema::create('boorus_flags', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('booru_id')->nullable();
+            $table->bigInteger('tag_id')->nullable();
+            $table->bigInteger('pool_id')->nullable();
+            $table->bigInteger('comment_id')->nullable();
+            $table->bigInteger('thread_id')->nullable();
+            $table->bigInteger('creator_id')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('boorus_sources', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('booru_id');
+            $table->string('source')->nullable();
             $table->timestamps();
         });
 
@@ -36,7 +55,7 @@ class Hive extends Migration
             $table->bigIncrements('id');
             $table->text('body');
             $table->integer('user_id');
-            $table->integer('booru_id');
+            $table->bigInteger('booru_id');
             $table->boolean('as_admin')->default('0');
             $table->boolean('as_mod')->default('0');
             $table->boolean('deleted')->default('0');
@@ -58,8 +77,8 @@ class Hive extends Migration
 
         Schema::create('boorus_tags', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('booru_id');
-            $table->integer('tag_id');
+            $table->bigInteger('booru_id');
+            $table->bigInteger('tag_id');
             $table->timestamps();
         });
 
@@ -71,7 +90,7 @@ class Hive extends Migration
 
         Schema::create('favs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('image_id');
+            $table->bigInteger('image_id');
             $table->integer('user_id');
             $table->timestamps();
         });
@@ -87,8 +106,8 @@ class Hive extends Migration
 
         Schema::create('boorus_pools', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('booru_id');
-            $table->integer('pool_id');
+            $table->bigInteger('booru_id');
+            $table->bigInteger('pool_id');
             $table->timestamps();
         });
 
@@ -104,7 +123,7 @@ class Hive extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->integer('user_id');
-            $table->integer('category_id');
+            $table->bigInteger('category_id');
             $table->boolean('locked')->default('0');
             $table->boolean('deleted')->default('0');
             $table->boolean('pinned')->default('0');
@@ -115,7 +134,7 @@ class Hive extends Migration
             $table->bigIncrements('id');
             $table->text('body');
             $table->integer('user_id');
-            $table->integer('thread_id');
+            $table->bigInteger('thread_id');
             $table->boolean('as_admin')->default('0');
             $table->boolean('as_mod')->default('0');
             $table->boolean('deleted')->default('0');
@@ -137,6 +156,8 @@ class Hive extends Migration
         Schema::dropIfExists('pools');
         Schema::dropIfExists('boorus_tags');
         Schema::dropIfExists('boorus_pools');
+        Schema::dropIfExists('boorus_sources');
+        Schema::dropIfExists('boorus_flags');
         Schema::dropIfExists('hashes');
         Schema::dropIfExists('forum_categories');
         Schema::dropIfExists('forum_threads');

@@ -44,6 +44,10 @@ class Booru extends Model
         return $this->belongsToMany('App\Tag', 'boorus_tags')->where('type', 4)->withCount('posts');
     }
 
+    public function source() {
+        return $this->hasOne('App\Source', 'booru_id');
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Comment', 'booru_id');
