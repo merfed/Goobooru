@@ -6,7 +6,14 @@
 
 @section('content')
 
-<h2 class="mb-4">{{ $pool->name }} <span style="color: #ccc;">({{ ($pool->posts->count() > 0) ? $pool->posts->count() : 0 }})</span></h2>
+<div class="d-flex">
+    <div class="flex-auto">
+        <h2 class="mb-4">{{ $pool->name }} <span style="color: #ccc;">({{ ($pool->posts->count() > 0) ? $pool->posts->count() : 0 }})</span></h2>
+    </div>
+
+    <a href="{{ route('editPool', $pool) }}" class="mr-2">Edit</a>
+    <a href="{{ route('deletePool', $pool) }}" style="color: #f00">Delete</a>
+</div>
 
 @if ($posts->count())
 <div class="wrapper-masonry content">

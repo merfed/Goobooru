@@ -172,4 +172,35 @@ class Pools extends Controller
             'posts' => $id->posts()->paginate(config('goobooru.paginate'))
         ]);
     }
+
+    public function edit(Pool $id)
+    {
+        return view('pools.edit', [
+            'pool' => $id
+        ]);
+    }
+
+    public function update(Pool $id, Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:2',
+            'visible' => 'required'
+        ]);
+
+        $id->update([
+            'name' => request('name'),
+            'description' => request('description'),
+            'visible' => request('visible')
+        ]);
+
+        return redirect()->back()->with('success', 'The pool <b>'. $id->name .'</b> has been updated.');
+    }
+
+    public function delete(Pool $id)
+    {
+        Pooled::where('pool_id', $id->id)->delete();
+        $id->delete();
+
+        return redirect()->route('pools')->with('success', 'The pool has been deleted.');
+    }
 }

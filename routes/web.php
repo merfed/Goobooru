@@ -64,6 +64,9 @@ Route::group(['prefix' => 'pools', 'middleware' => ['web', 'auth']], function() 
 
 Route::group(['prefix' => 'pool', 'middleware' => ['web']], function() {
     Route::get('/{id}', 'Pools@pool')->name('pool');
+    Route::get('/{id}/edit', 'Pools@edit')->name('editPool');
+    Route::get('/{id}/delete', 'Pools@delete')->name('deletePool');
+    Route::post('/{id}/update', 'Pools@update')->name('updatePool');
 });
 
 Route::group(['prefix' => 'tags', 'middleware' => ['web']], function() {
