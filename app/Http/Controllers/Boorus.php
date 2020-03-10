@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Booru;
-use App\Tag;
-use App\Fav;
-use App\Tagged;
 use App\Comment;
+use App\Fav;
+use App\Flagged;
 use App\Source;
+use App\Tag;
+use App\Tagged;
+use Auth;
 use File;
-use Image;
 use Illuminate\Http\Request;
+use Image;
 
 class Boorus extends Controller
 {
     public function index()
     {
         return view('posts.index', [
-            'tags' => Tag::defaultListing(),
-            'posts' => Booru::latest()->paginate(config('goobooru.paginate'))
+            'tags'  => Tag::defaultListing(),
+            'posts' => Booru::latest()->paginate(config('goobooru.paginate')),
         ]);
     }
 
@@ -29,31 +30,31 @@ class Boorus extends Controller
         $id->save();
 
         return view('posts.view', [
-            'post' => $id,
-            'metas' => ['artists', 'characters', 'copyrights', 'years']
+            'post'  => $id,
+            'metas' => ['artists', 'characters', 'copyrights', 'years'],
         ]);
     }
 
     public function random()
     {
         return view('posts.view', [
-            'post' => Booru::all()->random(),
-            'metas' => ['artists', 'characters', 'copyrights', 'years']
+            'post'  => Booru::all()->random(),
+            'metas' => ['artists', 'characters', 'copyrights', 'years'],
         ]);
     }
 
     public function hot()
     {
         return view('posts.index', [
-            'tags' => Tag::defaultListing(),
-            'posts' => Booru::where('views', '>', config('goobooru.hot_threshold'))->paginate(config('goobooru.paginate'))
+            'tags'  => Tag::defaultListing(),
+            'posts' => Booru::where('views', '>', config('goobooru.hot_threshold'))->paginate(config('goobooru.paginate')),
         ]);
     }
 
     public function urls()
     {
         return view('posts.urls', [
-            'urls' => Source::paginate(config('goobooru.paginate'))
+            'urls' => Source::paginate(config('goobooru.paginate')),
         ]);
     }
 
@@ -75,10 +76,10 @@ class Boorus extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|mimes:'. config('goobooru.allowed_filetypes') .'|max:'. config('goobooru.max_file_size'),
-            'title' => 'max:512',
-            'tags' => 'required',
-            'rating' => 'required'
+            'file'   => 'required|mimes:' . config('goobooru.allowed_filetypes') . '|max:' . config('goobooru.max_file_size'),
+            'title'  => 'max:512',
+            'tags'   => 'required',
+            'rating' => 'required',
         ]);
 
         // if (!$this->checkImage()) {
@@ -86,41 +87,41 @@ class Boorus extends Controller
         // }
 
         if (!Tags::hasEnoughTags(request('tags'))) {
-            return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>'. config('goobooru.min_tags') .'</b>');
+            return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>' . config('goobooru.min_tags') . '</b>');
         }
 
-        $image = Image::make($request->file('file'));
-        $slug = str_random(32);
-        $path = public_path(config('goobooru.upload_path'));
+        $image          = Image::make($request->file('file'));
+        $slug           = str_random(32);
+        $path           = public_path(config('goobooru.upload_path'));
         $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
-        $ext = $request->file('file')->getClientOriginalExtension();
+        $ext            = $request->file('file')->getClientOriginalExtension();
 
-        $original = $slug .'.'. $ext;
-        $width = $image->width();
-        $height = $image->height();
+        $original  = $slug . '.' . $ext;
+        $width     = $image->width();
+        $height    = $image->height();
         $thumbnail = 'thumb_' . $slug . '.' . $ext;
-        $image->save($path.$original);
+        $image->save($path . $original);
 
         $image->resize(800, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
 
-        $image->save($thumbnail_path.$thumbnail);
+        $image->save($thumbnail_path . $thumbnail);
 
         $booru = Booru::create([
-            'image' => $original,
+            'image'       => $original,
             'uploader_id' => Auth::user()->id,
-            'title' => trim(request('title')),
-            'rating' => request('rating'),
-            'width' => $width,
-            'height' => $height
+            'title'       => trim(request('title')),
+            'rating'      => request('rating'),
+            'width'       => $width,
+            'height'      => $height,
         ]);
 
         if ($request->source != null) {
             Source::create([
                 'booru_id' => $booru->id,
-                'source' => trim(request('source')),
+                'source'   => trim(request('source')),
             ]);
         }
 
@@ -134,7 +135,7 @@ class Boorus extends Controller
     public function edit(Booru $id)
     {
         return view('post.edit', [
-            'post' => $id
+            'post' => $id,
         ]);
     }
 
@@ -146,12 +147,12 @@ class Boorus extends Controller
     public function processQueue(Booru $id, Request $request)
     {
         $this->validate($request, [
-            'tags' => 'required',
-            'rating' => 'required'
+            'tags'   => 'required',
+            'rating' => 'required',
         ]);
 
         if (!Tags::hasEnoughTags(request('tags'))) {
-            return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>'. config('goobooru.min_tags') .'</b>');
+            return back()->with('error', 'You have not supplied enough tags to meet the minimum required amount of <b>' . config('goobooru.min_tags') . '</b>');
         }
 
         Tags::processTags(request('tags'), $id);
@@ -164,10 +165,10 @@ class Boorus extends Controller
         // md5 desired file
         // check against existing hashes
         // HASH FOUND
-            // return FALSE
+        // return FALSE
         // NO HASH FOUND
-            // Create hash
-            // return TRUE
+        // Create hash
+        // return TRUE
     }
 
     public function processMeta($request, $booru)
@@ -176,7 +177,7 @@ class Boorus extends Controller
             1 => 'artist',
             2 => 'character',
             3 => 'copyright',
-            4 => 'year'
+            4 => 'year',
         ];
 
         foreach ($metas as $id => $type) {
@@ -218,46 +219,74 @@ class Boorus extends Controller
         } else {
             Fav::create([
                 'image_id' => $id->id,
-                'user_id' => Auth::user()->id
+                'user_id'  => Auth::user()->id,
             ]);
 
             return back()->with('success', 'This post has been added to your favorites.');
         }
     }
 
+    public function flagged()
+    {
+        return view('posts.flagged', [
+            'posts' => Flag::paginate(config('goobooru.paginate')),
+        ]);
+    }
+
+    public function allowFlagged(Flag $id)
+    {
+        $id->delete();
+
+        return redirect()->back()->with('success', 'The image has been rejected and allowed to stay on the site.');
+    }
+
+    public function deleteFlagged(Flag $id)
+    {
+        $this->delete($id->post);
+        $id->delete();
+
+        return redirect()->back()->with('success', 'The image removed from the site.');
+    }
+
     public function deletePost(Booru $id)
     {
-        $path = public_path(config('goobooru.upload_path'));
+        $this->delete($id);
+
+        return redirect()->route('posts')->with('success', 'The post has been deleted.');
+    }
+
+    public function delete($post)
+    {
+        $path           = public_path(config('goobooru.upload_path'));
         $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
 
-        $id->comments()->delete();
-        $id->source()->delete();
-        $id->flagged()->delete();
+        $post->comments()->delete();
+        $post->source()->delete();
+        $post->flagged()->delete();
 
         // $id->pools()->delete();
 
-        Tagged::where('booru_id', $id->id)->delete();
-        Fav::where('image_id', $id->id)->delete();
+        Tagged::where('booru_id', $post->id)->delete();
+        Fav::where('image_id', $post->id)->delete();
 
-        File::delete([$path.$id->image, $thumbnail_path.'thumb_'.$id->image]);
+        File::delete([$path . $post->image, $thumbnail_path . 'thumb_' . $post->image]);
 
-        $id->delete();
-
-        return redirect()->route('posts')->with('success', 'The post has been deleted.');
+        $post->delete();
     }
 
     public function comment(Booru $id, Request $request)
     {
         $this->validate($request, [
-            'body' => 'required'
+            'body' => 'required',
         ]);
 
         Comment::create([
-            'body' => request('body'),
-            'user_id' => Auth::user()->id,
-            'booru_id' => $id->id
+            'body'     => request('body'),
+            'user_id'  => Auth::user()->id,
+            'booru_id' => $id->id,
         ]);
 
         return back()->with('success', 'Your comment has been posted.');
     }
+
 }

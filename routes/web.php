@@ -22,6 +22,9 @@ Route::group(['prefix' => 'posts', 'middleware' => ['web']], function() {
     Route::get('/urls', 'Boorus@urls')->name('urlPosts');
     Route::get('/dcma', 'Boorus@dcma')->name('dcma');
     Route::get('/tos', 'Boorus@tos')->name('tos');
+    Route::get('/flagged', 'Boorus@flagged')->name('flagged');
+    Route::get('/flagged/{id}/allow', 'Boorus@allowFlagged')->name('allowFlagged');
+    Route::get('/flagged/{id}/remove', 'Boorus@deleteFlagged')->name('deleteFlagged');
     // Route::get('/help', 'Boorus@help')->name('help');
 });
 

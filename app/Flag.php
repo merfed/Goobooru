@@ -11,6 +11,6 @@ class Flag extends Model
 
     public function post()
     {
-        $this->hasOne('App\Booru', 'id', 'booru_id');
+        return $this->hasOne('App\Booru', 'id', 'booru_id');
     }
 }
