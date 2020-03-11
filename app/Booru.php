@@ -150,63 +150,103 @@ class Booru extends Model
         $ext = $data->file->getClientOriginalExtension();
         $path = public_path(config('goobooru.upload_path'));
         $thumbnail_path = public_path(config('goobooru.upload_path_thumb'));
-        $original = Image::make($data->file);
-        $thumbnail = Image::make($data->file);
-        $thumbnail->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
 
-        $upload = (object) [
-            'original' => (object) [
-                'image' => $original,
-                'name' => $slug .'.'. $ext,
-                'width' => $original->width(),
-                'height' => $original->height(),
-                'path' => $path . $slug .'.'. $ext,
-            ],
-            'thumbnail' => (object) [
-                'image' => $thumbnail,
-                'name' => 'thumb_'. $slug .'.'. $ext,
-                'path' => $thumbnail_path . 'thumb_'. $slug .'.'. $ext,
-            ],
-            'title' => $data->title,
-            'rating' => $data->rating,
-            'source' => $data->source
-        ];
+        if (! in_array($ext, ['webm', 'mp4'])) {
 
-        $original->save($upload->original->path);
-        $thumbnail->save($upload->thumbnail->path);
+            $original = Image::make($data->file);
+            $thumbnail = Image::make($data->file);
+            $thumbnail->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
 
-        $booru = Booru::create([
-            'image' => $upload->original->name,
-            'uploader_id' => Auth::user()->id,
-            'title' => $upload->title,
-            'rating' => $upload->rating,
-            'width' => $upload->original->width,
-            'height' => $upload->original->height,
-        ]);
-
-        if ($upload->source != null) {
-            Source::create([
-                'booru_id' => $booru->id,
-                'source' => trim($upload->source)
-            ]);
-        }
-
-        if ($checkTags) {
-            Tag::processTags($data->tags, $booru);
-
-            $metas = [
-                1 => 'artist',
-                2 => 'character',
-                3 => 'copyright',
-                4 => 'year',
+            $upload = (object) [
+                'original' => (object) [
+                    'image' => $original,
+                    'name' => $slug .'.'. $ext,
+                    'width' => $original->width(),
+                    'height' => $original->height(),
+                    'path' => $path . $slug .'.'. $ext,
+                ],
+                'thumbnail' => (object) [
+                    'image' => $thumbnail,
+                    'name' => 'thumb_'. $slug .'.'. $ext,
+                    'path' => $thumbnail_path . 'thumb_'. $slug .'.'. $ext,
+                ],
+                'title' => $data->title,
+                'rating' => $data->rating,
+                'source' => $data->source
             ];
 
-            foreach ($metas as $id => $type) {
-                if ($data->has($type)) {
-                    Tag::processMeta(request($type), $id, $booru);
+            $original->save($upload->original->path);
+            $thumbnail->save($upload->thumbnail->path);
+
+            $booru = Booru::create([
+                'image' => $upload->original->name,
+                'uploader_id' => Auth::user()->id,
+                'title' => $upload->title,
+                'rating' => $upload->rating,
+                'width' => $upload->original->width,
+                'height' => $upload->original->height,
+            ]);
+
+            if ($upload->source != null) {
+                Source::create([
+                    'booru_id' => $booru->id,
+                    'source' => trim($upload->source)
+                ]);
+            }
+
+            if ($checkTags) {
+                Tag::processTags($data->tags, $booru);
+
+                $metas = [
+                    1 => 'artist',
+                    2 => 'character',
+                    3 => 'copyright',
+                    4 => 'year',
+                ];
+
+                foreach ($metas as $id => $type) {
+                    if ($data->has($type)) {
+                        Tag::processMeta(request($type), $id, $booru);
+                    }
+                }
+            }
+        } else {
+            $image = $data->file;
+            $name = str_random(32) .'.'. $image->getClientOriginalExtension();
+
+            $image->move(public_path(config('goobooru.upload_path')), $name);
+
+            $booru = Booru::create([
+                'image' => $name,
+                'uploader_id' => Auth::user()->id,
+                'title' => $data->title,
+                'rating' => $data->rating,
+            ]);
+
+            if ($data->source != null) {
+                Source::create([
+                    'booru_id' => $booru->id,
+                    'source' => trim($data->source)
+                ]);
+            }
+
+            if ($checkTags) {
+                Tag::processTags($data->tags, $booru);
+
+                $metas = [
+                    1 => 'artist',
+                    2 => 'character',
+                    3 => 'copyright',
+                    4 => 'year',
+                ];
+
+                foreach ($metas as $id => $type) {
+                    if ($data->has($type)) {
+                        Tag::processMeta(request($type), $id, $booru);
+                    }
                 }
             }
         }

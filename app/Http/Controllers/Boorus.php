@@ -82,7 +82,7 @@ class Boorus extends Controller
             'tags'   => 'required',
             'rating' => 'required',
         ]);
-
+dd(getimagesize($request->file));
         Booru::upload($request);
 
         return redirect()->back()->with('success', 'Your image has been uploaded successfully.');
